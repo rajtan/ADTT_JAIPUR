@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_all"
+    android:orientation="vertical"
+    tools:context="com.rto_driving_test_rajasthan.Authorization.LoginActivity">
+    <!--@color/grey-->
+
+   <include layout="@layout/tool_bar_layout"></include>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="20dp"
+                        >
+                    <ImageView
+                        android:layout_width="250dp"
+                        android:layout_height="150dp"
+                        android:layout_centerInParent="true"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/logo_login"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="30dp"
+                    android:text="@string/center_no"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/left_right_margin"
+                    android:layout_marginRight="@dimen/left_right_margin"
+                    android:layout_marginTop="@dimen/left_right_margin"
+                    />
+                <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:background="@drawable/white_grey_rectangle"
+                android:layout_marginLeft="@dimen/left_right_margin"
+                android:layout_marginRight="@dimen/left_right_margin"
+                android:layout_marginTop="@dimen/center_info_top_margin"
+                >
+            <ImageView
+                android:id="@+id/iv_mobi"
+                android:layout_width="28dp"
+                android:layout_height="30dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:visibility="gone"
+                android:src="@drawable/sch_icon"/>
+
+                <EditText
+                    android:id="@+id/mobile_et"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:background="@null"
+                    android:hint="@string/center_no"
+                    android:inputType="number"
+                    android:paddingLeft="10dp"
+                    android:maxLength="20"
+                    android:text=""
+                    android:layout_toRightOf="@+id/iv_mobi"
+                    android:textColor="@color/text_primary"
+                    android:textSize="@dimen/text_normal"/>
+
+            </RelativeLayout>
+
+                <Button
+                    android:id="@+id/login_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginLeft="@dimen/left_right_margin"
+                    android:layout_marginRight="@dimen/left_right_margin"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/login_rectangle"
+                    android:text="@string/login"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_normal"/>
+            </LinearLayout>
+        </ScrollView>
+        <include layout="@layout/error_layout"> </include>
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp">
+        <include layout="@layout/error_layout"></include>
+    </RelativeLayout>
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:openDrawer="start">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+
+            >
+
+            <android.support.design.widget.AppBarLayout
+                android:id="@+id/appbar"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:theme="@style/ThemeOverlay.AppCompat">
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar_default"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@color/colorPrimary"
+                    android:theme="@style/ThemeOverlay.AppCompat">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent"
+                        >
+
+                        <TextView
+                            android:id="@+id/tv_title"
+                            android:layout_width="fill_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center|left"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="5dp"
+                            android:text="hello"
+                            android:textColor="@color/white"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+                </android.support.v7.widget.Toolbar>
+            </android.support.design.widget.AppBarLayout>
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/appbar"
+                android:background="@color/bg_color">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/bg_color"
+                    android:orientation="vertical">
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                        android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                        app:cardCornerRadius="5dp"
+                        android:layout_marginTop="10dp"
+                        >
+                    <RelativeLayout
+                        android:id="@+id/rl_name"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:padding="4dp"
+                        >
+
+                        <TextView
+                            android:id="@+id/tv_name"
+                            android:layout_width="fill_parent"
+                            android:layout_height="30dp"
+                            android:layout_toRightOf="@+id/rl_date"
+                            android:gravity="center|left"
+                            android:text="Rakesh Verma"
+                            android:paddingLeft="10dp"
+                            android:textSize="14dp" />
+
+                        <TextView
+                            android:id="@+id/tv_id"
+                            android:layout_width="fill_parent"
+                            android:layout_height="30dp"
+                            android:layout_toRightOf="@+id/rl_date"
+                            android:layout_below="@+id/tv_name"
+                            android:gravity="center|left"
+                            android:text="ID:24020202023"
+                            android:paddingLeft="10dp"
+                            android:textSize="14dp" />
+                        <RelativeLayout
+                            android:id="@+id/rl_date"
+                            android:layout_width="70dp"
+                            android:layout_height="fill_parent">
+
+                            <ImageView
+                                android:id="@+id/iv_date"
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/pic" />
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                    </android.support.v7.widget.CardView>
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                        android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                        app:cardCornerRadius="5dp"
+                        android:layout_marginTop="10dp"
+                        >
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center|left"
+                            android:orientation="horizontal"
+                            android:padding="10dp"
+                            >
+
+                            <TextView
+                                android:layout_width="@dimen/text_view_size"
+                                android:layout_height="wrap_content"
+                                android:text="Application Number"
+                                android:textSize="14dp" />
+
+                            <TextView
+                                android:id="@+id/tv_ap_no"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:text="2342422"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                        android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                        app:cardCornerRadius="5dp"
+                        android:layout_marginTop="10dp"
+                        >
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:layout_marginRight="5dp"
+                                android:gravity="center|left"
+                                android:orientation="horizontal"
+                                android:padding="10dp"
+                              >
+                                <TextView
+                                    android:layout_width="@dimen/text_view_size"
+                                    android:layout_height="wrap_content"
+                                    android:text="Name"
+                                    android:textSize="14dp"
+                                    />
+                                <TextView
+                                    android:id="@+id/tv_nm"
+                                    android:layout_width="fill_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Raj Vishvakarma "
+                                    android:textSize="14dp" />
+
+                            </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                        android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                        app:cardCornerRadius="5dp"
+                        android:layout_marginTop="10dp"
+                        >
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center|left"
+                            android:orientation="horizontal"
+                            android:padding="10dp"
+                          >
+
+                            <TextView
+                                android:layout_width="@dimen/text_view_size"
+                                android:layout_height="wrap_content"
+                                android:text="Father Name"
+                                android:textSize="14dp" />
+
+                            <TextView
+                                android:id="@+id/tv_fath_nm"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Raju yadav"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                        android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                        app:cardCornerRadius="5dp"
+                        android:layout_marginTop="10dp"
+                        >
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center|left"
+                            android:orientation="horizontal"
+                            android:padding="10dp"
+                            >
+
+                            <TextView
+                                android:layout_width="@dimen/text_view_size"
+                                android:layout_height="wrap_content"
+                                android:text="DOB"
+                                android:textSize="14dp" />
+
+                            <TextView
+                                android:id="@+id/tv_dob"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:text="03/04/1992"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                        android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                        app:cardCornerRadius="5dp"
+                        android:layout_marginTop="10dp"
+                        >
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center|left"
+                            android:orientation="horizontal"
+                            android:padding="10dp"
+                            >
+
+                            <TextView
+                                android:layout_width="@dimen/text_view_size"
+                                android:layout_height="wrap_content"
+                                android:text="DL Number"
+                                android:textSize="14dp" />
+
+                            <TextView
+                                android:id="@+id/tv_dl_no"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:text="999989958"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                        android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                        app:cardCornerRadius="5dp"
+                        android:layout_marginTop="10dp"
+                        >
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center|left"
+                            android:orientation="horizontal"
+                            android:padding="10dp"
+                            >
+
+                            <TextView
+                                android:layout_width="@dimen/text_view_size"
+                                android:layout_height="wrap_content"
+                                android:text="Date"
+                                android:textSize="14dp" />
+
+                            <TextView
+                                android:id="@+id/tv_date"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:text="22/03/2017"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                        android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                        app:cardCornerRadius="5dp"
+                        android:layout_marginTop="10dp"
+                        >
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center|left"
+                            android:orientation="horizontal"
+                            android:padding="10dp"
+                            >
+
+                            <TextView
+                                android:layout_width="@dimen/text_view_size"
+                                android:layout_height="wrap_content"
+                                android:text="Time"
+                                android:textSize="14dp" />
+
+                            <TextView
+                                android:id="@+id/tv_time"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:text="3.30 PM"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <android.support.v7.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                        android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                        app:cardCornerRadius="5dp"
+                        android:layout_marginTop="10dp"
+                        >
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:gravity="center|left"
+                            android:orientation="horizontal"
+                            android:padding="10dp"
+                            >
+
+                            <TextView
+                                android:layout_width="@dimen/text_view_size"
+                                android:layout_height="wrap_content"
+                                android:text="Vehicle Class"
+                                android:textSize="14dp" />
+
+                            <TextView
+                                android:id="@+id/tv_vehicle_class"
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Light Rigid(LR class) heavy vehicle"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+                    </android.support.v7.widget.CardView>
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="@dimen/button_height"
+                        android:layout_marginBottom="@dimen/center_info_left_righ_margin"
+                        android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                        android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                        android:layout_marginTop="30dp"
+                        >
+                        <Button
+                            android:id="@+id/btn_cancel"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:background="@drawable/login_rectangle"
+                            android:layout_toLeftOf="@+id/view_diff"
+                            android:text="@string/cancel"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_normal" />
+
+                        <View
+                            android:id="@+id/view_diff"
+                            android:layout_width="1dp"
+                            android:layout_height="fill_parent"
+                            android:layout_centerInParent="true"
+                            ></View>
+                        <Button
+                            android:id="@+id/btn_submit_detail"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+                            android:background="@drawable/login_rectangle"
+                            android:layout_toRightOf="@+id/view_diff"
+                            android:text="@string/next"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/text_normal" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </ScrollView>
+
+        </RelativeLayout>
+        <!--
+        //
+        -->
+               <ScrollView
+                       android:layout_width="260dp"
+                       android:layout_height="match_parent"
+                       android:layout_gravity="start"
+                       android:background="@color/white"
+                       android:clickable="true"
+                      >
+
+                     <LinearLayout
+                         android:layout_width="260dp"
+                         android:layout_height="wrap_content"
+                         android:orientation="vertical">
+
+                         <RelativeLayout
+                             android:layout_width="match_parent"
+                             android:layout_height="150dp"
+                             android:background="@color/white"
+                             android:paddingBottom="15dp"
+                             android:paddingTop="5dp">
+
+                             <ImageView
+                                 android:id="@+id/user_iv"
+                                 android:layout_width="100dp"
+                                 android:layout_height="100dp"
+                                 android:layout_centerHorizontal="true"
+                                 android:src="@drawable/logo_login" />
+
+                             <TextView
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="35dp"
+                                 android:layout_below="@+id/user_iv"
+                                 android:layout_centerHorizontal="true"
+                                 android:layout_marginTop="3dp"
+                                 android:text="@string/app_name"
+                                 android:textColor="@color/black"
+                                 android:textSize="@dimen/text_normal" />
+                         </RelativeLayout>
+
+                         <RelativeLayout
+                             android:id="@+id/rl_home"
+                             android:layout_width="match_parent"
+                             android:layout_height="40dp"
+                             android:background="@color/home_bg_color">
+
+                             <ImageView
+                                 android:id="@+id/iv_home"
+                                 android:layout_width="25dp"
+                                 android:layout_height="25dp"
+                                 android:layout_centerVertical="true"
+                                 android:layout_marginLeft="20dp"
+                                 android:src="@drawable/home_hover" />
+
+                             <TextView
+                                 android:id="@+id/tv_home"
+                                 android:layout_width="fill_parent"
+                                 android:layout_height="40dp"
+                                 android:layout_toRightOf="@+id/iv_home"
+                                 android:background="@null"
+                                 android:gravity="center_vertical"
+                                 android:paddingLeft="10dp"
+                                 android:text="Home"
+                                 android:textColor="@color/black"
+                                 android:textSize="@dimen/text_normal" />
+                         </RelativeLayout>
+
+                         <RelativeLayout
+                             android:id="@+id/rl_share"
+                             android:layout_width="match_parent"
+                             android:layout_height="40dp">
+
+                             <ImageView
+                                 android:id="@+id/iv_share"
+                                 android:layout_width="25dp"
+                                 android:layout_height="25dp"
+                                 android:layout_centerVertical="true"
+                                 android:layout_marginLeft="20dp"
+                                 android:src="@drawable/share_app" />
+
+                             <TextView
+                                 android:id="@+id/tv_share"
+                                 android:layout_width="fill_parent"
+                                 android:layout_height="40dp"
+                                 android:layout_toRightOf="@+id/iv_share"
+                                 android:gravity="center_vertical"
+                                 android:paddingLeft="10dp"
+                                 android:text="Share App"
+                                 android:textColor="@color/text_primary"
+                                 android:textSize="@dimen/text_normal" />
+                         </RelativeLayout>
+
+                         <RelativeLayout
+                             android:id="@+id/rl_logout"
+                             android:layout_width="match_parent"
+                             android:layout_height="40dp">
+
+                             <ImageView
+                                 android:id="@+id/iv_logout"
+                                 android:layout_width="25dp"
+                                 android:layout_height="25dp"
+                                 android:layout_centerVertical="true"
+                                 android:layout_marginLeft="20dp"
+                                 android:src="@drawable/logout" />
+
+                             <TextView
+                                 android:id="@+id/tv_logout"
+                                 android:layout_width="fill_parent"
+                                 android:layout_height="40dp"
+                                 android:layout_toRightOf="@+id/iv_logout"
+                                 android:gravity="center_vertical"
+                                 android:paddingLeft="10dp"
+                                 android:text="Logout"
+                                 android:textColor="@color/text_primary"
+                                 android:textSize="@dimen/text_normal" />
+                         </RelativeLayout>
+                     </LinearLayout>
+                 </ScrollView>
+                 -->
+    </android.support.v4.widget.DrawerLayout>
+</RelativeLayout>
+
+
+
+
+

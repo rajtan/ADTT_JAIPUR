@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_all"
+    android:orientation="vertical"
+    tools:context="com.rto_driving_test_rajasthan.Authorization.ActShowRoute">
+    <!--@color/grey-->
+    <include layout="@layout/tool_bar_layout"></include>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+
+                <Button
+                    android:id="@+id/bt_two_wheeler"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginLeft="@dimen/left_right_margin"
+                    android:layout_marginRight="@dimen/left_right_margin"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/retest_rectangle"
+                    android:text="@string/two_wheelar"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_normal"/>
+                <Button
+                    android:id="@+id/bt_four_wheeler"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginLeft="@dimen/left_right_margin"
+                    android:layout_marginRight="@dimen/left_right_margin"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/login_rectangle"
+                    android:text="@string/four_wheelar"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_normal"/>
+            </LinearLayout>
+        </ScrollView>
+        <include layout="@layout/error_layout"> </include>
+    </RelativeLayout>
+
+</LinearLayout>

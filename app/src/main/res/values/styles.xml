@@ -1,0 +1,73 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowBackground">@color/back_bg_color</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textColorHint">@color/text_secondary</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <item name="actionMenuTextColor">@color/white</item>
+        <item name="android:windowAnimationStyle">@style/right_to_left_anim_style</item>
+
+    </style>
+
+    <style name="AppTheme.ActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
+        ...
+        <item name="actionMenuTextColor">@color/white</item>
+        ...
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="right_to_left_anim_style">
+        <item name="android:activityOpenEnterAnimation">@anim/activity_open_enter_1</item>
+        <item name="android:activityOpenExitAnimation">@anim/activity_open_exit_1</item>
+        <item name="android:activityCloseEnterAnimation">@anim/activity_close_enter_1</item>
+        <item name="android:activityCloseExitAnimation">@anim/activity_close_exit_1</item>
+    </style>
+
+
+    <style name="MyDialogTheme1" parent="android:Theme.Dialog">
+        <!-- Fill the screen -->
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+
+        <!-- No backgrounds, titles or window float -->
+        <item name="android:windowBackground">@drawable/trans1</item>
+        <item name="android:windowNoTitle">false</item>
+        <item name="android:windowIsFloating">false</item>
+
+        <!-- Just to prove it's working -->
+        <item name="android:background">@null</item>
+    </style>
+<!--for tab text-->
+    <style name="MyCustomTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textAppearance">@style/CustomTabWidgetText</item>
+    </style>
+
+    <style name="CustomTabWidgetText"
+        parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+   <!-- <style name="MyTabLayoutTextAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title.Inverse">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+
+    -->
+
+    <style name="CustomTextStyle" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <!--for tab text end-->
+</resources>

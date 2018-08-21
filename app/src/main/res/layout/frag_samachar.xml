@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/home_bg_color"
+    android:layout_height="match_parent">
+
+
+    <RelativeLayout
+        android:id="@+id/rl_samachar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="@dimen/left_right_margin"
+            android:gravity="center"
+            android:paddingLeft="@dimen/left_right_margin"
+            android:text="Comming soon"
+            android:textSize="15dp"
+
+            android:id="@+id/tv_no_data" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rc_view_samachar"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:background="@null"
+
+            >
+
+        </android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
+
+</RelativeLayout>

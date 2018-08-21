@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.rto_driving_test_rajasthan">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/drivingtest"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!-- @drawable/ic_app_logo_white -->
+        <activity
+            android:name=".Authorization.SplashActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Authorization.ActTabPhoto"
+            android:screenOrientation="portrait">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN"/> -->
+            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+            <!-- </intent-filter> -->
+        </activity>
+        <activity
+            android:name=".Authorization.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Authorization.ActRetestAppliDetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Authorization.RetestActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Authorization.HomeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Authorization.ActAppoimentList"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Authorization.ActShowTrack"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Authorization.ActTestReport"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Home.ActNewDashboard"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Authorization.ActShowRoute"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Authorization.ActResultOld"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Authorization.ResultActivity"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="bd038bf93ab39757a3a5b315dc4551f719b5459d" />
+
+        <activity
+            android:name=".Authorization.VehicalSelectionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Authorization.ChangeIPActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Authorization.PendingTest"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Authorization.AppointmentCheckActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Authorization.ApplicantInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Authorization.VerifyActivity"
+            android:screenOrientation="portrait">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
+        </activity>
+        <activity android:name=".Authorization.TrackSettingActivity"
+            android:screenOrientation="portrait">
+
+        </activity>
+    </application>
+
+</manifest>

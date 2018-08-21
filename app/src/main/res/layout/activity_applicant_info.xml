@@ -1,0 +1,732 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    android:orientation="vertical"
+    tools:context="com.rto_driving_test_rajasthan.Authorization.ActShowRoute">
+
+    <include layout="@layout/tool_bar_layout"></include>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/appbar"
+            android:background="@color/bg_color">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/bg_color"
+                android:orientation="vertical">
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                    android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                    app:cardCornerRadius="5dp"
+                    android:layout_marginTop="10dp"
+                    >
+                    <RelativeLayout
+                        android:id="@+id/rl_name"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:padding="4dp"
+
+                        >
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_toRightOf="@+id/rl_date"
+                            >
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:weightSum="1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Applicant Name"
+                                    android:textSize="@dimen/textspin"
+                                    android:layout_weight=".4"
+                                    />
+                                <TextView
+                                    android:id="@+id/tv_name"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight=".6"
+                                    android:gravity="left"
+                                    android:text="Rakesh Verma"
+
+
+                                    android:paddingLeft="10dp"
+                                    android:textSize="@dimen/textspin"
+                                    android:textColor="@color/namecol"
+                                    />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:weightSum="1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Application No."
+                                    android:textSize="@dimen/textspin"
+                                    android:layout_weight=".4"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/tv_id"
+                                    android:layout_width="0dp"
+                                    android:layout_weight=".6"
+                                    android:layout_height="wrap_content"
+
+
+                                    android:gravity="left"
+                                    android:paddingLeft="10dp"
+                                    android:text="ID:24020202023"
+
+                                    android:textSize="@dimen/textspin" />
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:weightSum="1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="LL No."
+                                    android:layout_weight=".4"
+                                    android:textSize="@dimen/textspin"
+                                    />
+                                <TextView
+                                    android:id="@+id/tv_app"
+
+                                    android:layout_width="0dp"
+                                    android:layout_weight=".6"
+                                    android:layout_height="wrap_content"
+
+
+                                    android:gravity="left"
+                                    android:text="ID:24020202023"
+                                    android:paddingLeft="10dp"
+
+                                    android:textSize="@dimen/textspin" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:weightSum="1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="DOB"
+                                    android:layout_weight=".4"
+                                    android:textSize="@dimen/textspin"
+                                    />
+                                <TextView
+                                    android:id="@+id/tv_dob"
+
+                                    android:layout_width="0dp"
+                                    android:layout_weight=".6"
+                                    android:layout_height="wrap_content"
+
+
+                                    android:gravity="left"
+                                    android:text="ID:24020202023"
+                                    android:paddingLeft="10dp"
+
+                                    android:textSize="@dimen/textspin" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+
+                        <RelativeLayout
+                            android:id="@+id/rl_date"
+                            android:layout_width="@dimen/imgwidth"
+                            android:gravity="left"
+                            android:layout_height="fill_parent">
+
+                            <ImageView
+                                android:id="@+id/iv_date"
+                                android:layout_width="@dimen/imgwidth"
+                                android:layout_height="@dimen/imgwidth"
+                               android:padding="5dp"
+                                android:src="@drawable/pic" />
+                        </RelativeLayout>
+
+
+
+
+                    </RelativeLayout>
+
+
+
+                </android.support.v7.widget.CardView>
+                <TextView
+                    android:id="@+id/selectcam_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SELECT CAM"
+                    android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                    android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                    android:padding="2dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_weight=".3"
+                    />
+
+                <android.support.v7.widget.CardView
+                    android:id="@+id/selectcam_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                    android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                    app:cardCornerRadius="5dp"
+
+                    android:layout_marginTop="5dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="2dp"
+
+                        >
+
+                    <RelativeLayout
+                        android:id="@+id/rl_spi_dist"
+                        android:layout_width="match_parent"
+                        android:layout_weight=".7"
+                        android:layout_height="match_parent"
+                        android:layout_margin="2dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:gravity="center">
+                        <Spinner
+                            android:id="@+id/spi_cam"
+                            android:layout_width="match_parent"
+                            android:layout_height="fill_parent"
+
+                            android:background="@color/white"
+                            android:textSize="10sp" />
+
+                        <ImageView
+                            android:id="@+id/iv_spi_dist"
+                            android:layout_width="15dp"
+                            android:layout_height="10dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="5dp"
+                            android:background="@drawable/drop_down_dash"
+                            android:gravity="center_horizontal" />
+                    </RelativeLayout>
+
+
+
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="SELECT TERMINAL"
+                    android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                    android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                    android:padding="2dp"
+                    android:layout_marginTop="2dp"
+                    />
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                    android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                    app:cardCornerRadius="5dp"
+                    android:layout_marginTop="2dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="2dp"
+
+                        >
+
+                <RelativeLayout
+                    android:id="@+id/rl_splter"
+                    android:layout_width="match_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center">
+                    <Spinner
+                        android:id="@+id/spi_ter"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="@color/white"
+                        android:textSize="10sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_spi_imer"
+                        android:layout_width="15dp"
+                        android:layout_height="10dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/drop_down_dash"
+                        android:gravity="center_horizontal" />
+                </RelativeLayout>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                    android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                    app:cardCornerRadius="5dp"
+                    app:contentPadding="10dp"
+                    android:layout_marginTop="10dp"
+                    >
+
+                    <LinearLayout android:layout_width="match_parent"
+                        android:id="@+id/biometricLin"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        >
+
+                        <ImageView
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:src="@drawable/biometricimg" />
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                    android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                    app:cardCornerRadius="5dp"
+                    app:contentPadding="10dp"
+                    android:layout_marginTop="10dp"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/start_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="30dp"
+                        android:background="@color/colorPrimary"
+                        >
+
+                        <ImageView
+                            android:id="@+id/start_imgbike"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/bike"
+                            android:visibility="visible"
+
+                            />
+                        <ImageView
+                            android:id="@+id/start_img"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/car"
+                            android:visibility="visible"
+
+                            />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="START TEST"
+
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            />
+
+                    </LinearLayout>
+
+                </android.support.v7.widget.CardView>
+                <!--<android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                    android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                    app:cardCornerRadius="5dp"
+                    android:layout_marginTop="10dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center|left"
+                        android:orientation="horizontal"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:layout_width="@dimen/text_view_size"
+                            android:layout_height="wrap_content"
+                            android:text="APPLICATION NO"
+                            android:textSize="14dp" />
+
+                        <TextView
+                            android:id="@+id/tv_ap_no"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="2342422"
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                    android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                    app:cardCornerRadius="5dp"
+                    android:layout_marginTop="10dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center|left"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        >
+                        <TextView
+                            android:layout_width="@dimen/text_view_size"
+                            android:layout_height="wrap_content"
+                            android:text="CARD_NUMBER"
+                            android:textSize="14dp"
+                            />
+                        <TextView
+                            android:id="@+id/tv_cardno"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Raj Vishvakarma "
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                    android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                    app:cardCornerRadius="5dp"
+                    android:layout_marginTop="10dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center|left"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        >
+
+                        <TextView
+                            android:layout_width="@dimen/text_view_size"
+                            android:layout_height="wrap_content"
+                            android:text="COV_CD"
+                            android:textSize="14dp" />
+
+                        <TextView
+                            android:id="@+id/tv_covcd"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Raju yadav"
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                    android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                    app:cardCornerRadius="5dp"
+                    android:layout_marginTop="10dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center|left"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        >
+
+                        <TextView
+                            android:layout_width="@dimen/text_view_size"
+                            android:layout_height="wrap_content"
+                            android:text="DOB"
+                            android:textSize="14dp" />
+
+                        <TextView
+                            android:id="@+id/tv_dob"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="03/04/1992"
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                    android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                    app:cardCornerRadius="5dp"
+                    android:layout_marginTop="10dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center|left"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        >
+
+                        <TextView
+                            android:layout_width="@dimen/text_view_size"
+                            android:layout_height="wrap_content"
+                            android:text="DLTEST_SEQ"
+                            android:textSize="14dp" />
+
+                        <TextView
+                            android:id="@+id/tv_deltestsq"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="999989958"
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                    android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                    app:cardCornerRadius="5dp"
+                    android:layout_marginTop="10dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center|left"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        >
+
+                        <TextView
+                            android:layout_width="@dimen/text_view_size"
+                            android:layout_height="wrap_content"
+                            android:text="LLNO"
+                            android:textSize="14dp" />
+
+                        <TextView
+                            android:id="@+id/tv_llno"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="22/03/2017"
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                    android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                    app:cardCornerRadius="5dp"
+                    android:layout_marginTop="10dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center|left"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        >
+
+                        <TextView
+                            android:layout_width="@dimen/text_view_size"
+                            android:layout_height="wrap_content"
+                            android:text="LL_ISSUED_DT"
+                            android:textSize="14dp" />
+
+                        <TextView
+                            android:id="@+id/ll_issueddt"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="3.30 PM"
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                 <android.support.v7.widget.CardView
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                     android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                     app:cardCornerRadius="5dp"
+                     android:layout_marginTop="10dp"
+                     >
+                     <LinearLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_marginLeft="5dp"
+                         android:layout_marginRight="5dp"
+                         android:gravity="center|left"
+                         android:orientation="horizontal"
+                         android:padding="10dp"
+                         >
+
+                         <TextView
+                             android:layout_width="@dimen/text_view_size"
+                             android:layout_height="wrap_content"
+                             android:text="LL_OLA_CODE"
+                             android:textSize="14dp" />
+
+                         <TextView
+                             android:id="@+id/ll_olacode"
+                             android:layout_width="fill_parent"
+                             android:layout_height="wrap_content"
+                             android:text="Light Rigid(LR class) heavy vehicle"
+                             android:textSize="14dp" />
+
+                     </LinearLayout>
+                 </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                    android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                    app:cardCornerRadius="5dp"
+                    android:layout_marginTop="10dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center|left"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        >
+
+                        <TextView
+                            android:layout_width="@dimen/text_view_size"
+                            android:layout_height="wrap_content"
+                            android:text="LL_VALID_FROM"
+                            android:textSize="14dp" />
+
+                        <TextView
+                            android:id="@+id/tv_validfrom"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Light Rigid(LR class) heavy vehicle"
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+                    android:layout_marginRight="@dimen/center_info_left_righ_margin"
+                    app:cardCornerRadius="5dp"
+                    android:layout_marginTop="10dp"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:gravity="center|left"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        >
+
+                        <TextView
+                            android:layout_width="@dimen/text_view_size"
+                            android:layout_height="wrap_content"
+                            android:text="LL_VALID_TO"
+                            android:textSize="14dp" />
+
+                        <TextView
+                            android:id="@+id/tv_validto"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Light Rigid(LR class) heavy vehicle"
+                            android:textSize="14dp" />
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>-->
+
+
+            </LinearLayout>
+        </ScrollView>
+        <include layout="@layout/error_layout"> </include>
+
+
+    </RelativeLayout>
+
+</LinearLayout>

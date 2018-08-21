@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_all"
+    android:orientation="vertical"
+    tools:context="com.rto_driving_test_rajasthan.Authorization.ActShowRoute">
+    <!--@color/grey-->
+  <!--  <include layout="@layout/tool_bar_layout"></include>-->
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme"
+        android:id="@+id/toolbar_diff"
+        android:background="@color/colorPrimary"
+        >
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/rl_longclick"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <Button
+                    android:id="@+id/bt_fresh"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginLeft="@dimen/left_right_margin"
+                    android:layout_marginRight="@dimen/left_right_margin"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/retest_rectangle"
+                    android:text="@string/app_fresh"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_normal"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/bt_retest"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="@dimen/left_right_margin"
+                    android:layout_marginRight="@dimen/left_right_margin"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/login_rectangle"
+                    android:text="@string/app_retest"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_normal"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="AUTOMATED DRIVING TEST TRACK RAJASTHAN"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/textsize"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="50dp"
+                    android:background="@drawable/editborder"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:weightSum="1"
+
+                        >
+
+                        <TextView
+                            android:id="@+id/ipaddresstext"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight=".4"
+                            android:text="SERVER IP "
+
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="@dimen/textspin"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/ipaddress"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_weight=".6"
+                            android:text="NOT SET"
+                            android:textColor="@color/darkblue"
+                            android:textSize="@dimen/textspin" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/testtype_txtttt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+
+                            android:layout_weight=".4"
+                            android:text="TEST TYPE"
+                            android:textSize="@dimen/textspin"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/testtype_txt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".6"
+                            android:text="NOT SET"
+                            android:textColor="@color/darkblue"
+
+                            android:textSize="@dimen/textspin" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:padding="10dp"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/trackidtxttt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+
+                            android:layout_weight=".4"
+                            android:text="TRACK ID"
+                            android:textSize="@dimen/textspin"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/trackid_txt"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".6"
+                            android:text="NOT SET"
+                            android:visibility="gone"
+                            android:textColor="@color/darkblue"
+                            android:textSize="20sp" />
+
+                        <Spinner
+                            android:id="@+id/spin_trackid"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".4"
+
+                            android:layout_marginLeft="0dp"
+                            ></Spinner>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="PLEASE LONG PRESS ON SCREEN AND SET ALL CONFIGURATION"
+                    android:textColor="@color/darkblue"
+                    android:textSize="20sp"
+                    android:visibility="gone" />
+
+
+            </LinearLayout>
+        </ScrollView>
+
+        <include layout="@layout/error_layout"></include>
+
+        <LinearLayout
+            android:id="@+id/proceed_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PROCEED "
+
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_navigate_next_black_24dp" />
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

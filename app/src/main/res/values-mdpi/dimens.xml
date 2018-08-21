@@ -1,0 +1,10 @@
+<resources>
+
+    <dimen name="dash_icon_size">30dp</dimen>
+    <dimen name="dash_icon_heighg_size">30dp</dimen>
+    <dimen name="textsize">20sp</dimen>
+    <dimen name="textspin">15sp</dimen>
+    <dimen name="textcount">80sp</dimen>
+    <dimen name="imgwidth">100dp</dimen>
+
+</resources>

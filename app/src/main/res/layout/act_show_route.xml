@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_all"
+    android:orientation="vertical"
+
+    tools:context="com.rto_driving_test_rajasthan.Authorization.ActShowRoute">
+    <!--@color/grey-->
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_default"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="Thank you"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:id="@+id/rl_main_spi_dist"
+                    android:layout_width="fill_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/white_orange_rectangle"
+                  >
+
+                <RelativeLayout
+                    android:id="@+id/rl_spi_dist"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="2dp"
+                    android:gravity="center">
+                    <Spinner
+                        android:id="@+id/spi_dist"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="@color/white"
+                        android:textSize="10sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_spi_dist"
+                        android:layout_width="15dp"
+                        android:layout_height="10dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/drop_down_dash"
+                        android:gravity="center_horizontal" />
+                </RelativeLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rl_track"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+
+                    >
+                    <ImageView
+                        android:id="@+id/iv_track"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:src="@drawable/track"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        />
+                     <TextView
+                         android:id="@+id/tv_start"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/button_height"
+                         android:layout_marginRight="20dp"
+                         android:layout_marginLeft="20dp"
+                        android:text="Start Test"
+                        android:gravity="center"
+                         android:textColor="@color/white"
+                         android:textSize="@dimen/text_normal"
+                         android:layout_below="@+id/iv_track"
+                         android:background="@drawable/login_rectangle"
+                         android:layout_marginTop="30dp"
+                         android:layout_marginBottom="10dp"
+                        />
+                    <TextView
+                        android:id="@+id/tv_end"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:text="End Test"
+                        android:visibility="gone"
+                        android:gravity="center"
+                        android:layout_below="@+id/tv_start"
+                        android:background="@drawable/white_orange_rectangle"
+                        android:layout_marginTop="10dp"
+                        />
+                    <TextView
+                        android:id="@+id/tv_retest"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginLeft="20dp"
+                        android:text="Retest"
+                        android:visibility="gone"
+                        android:gravity="center"
+                        android:layout_below="@+id/tv_end"
+                        android:background="@drawable/white_orange_rectangle"
+                        android:layout_marginTop="10dp"
+                        />
+                    </RelativeLayout>
+
+
+
+            </LinearLayout>
+        </ScrollView>
+        <include layout="@layout/error_layout"> </include>
+    </RelativeLayout>
+
+</LinearLayout>

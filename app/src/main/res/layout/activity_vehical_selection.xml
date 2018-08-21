@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    tools:context="com.rto_driving_test_rajasthan.Authorization.VehicalSelectionActivity">
+    <include layout="@layout/tool_bar_layout" android:id="@+id/toolbar"></include>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select From the below Test Type"
+        android:id="@+id/txt_head"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/toolbar"
+        />
+
+    <!--<android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+        android:layout_marginRight="@dimen/center_info_left_righ_margin"
+        app:cardCornerRadius="5dp"
+        android:id="@+id/card_spin"
+        android:layout_below="@+id/txt_head"
+        android:layout_marginTop="20dp"
+        >
+        <RelativeLayout
+
+            android:id="@+id/spin_rel"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+
+            android:layout_weight=".28"
+
+
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+
+            >
+
+            <Spinner
+                android:id="@+id/spin_vehical"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:gravity="center"
+                android:spinnerMode="dropdown"
+
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:src="@drawable/downgray" />
+
+
+        </RelativeLayout>
+
+
+
+    </android.support.v7.widget.CardView>-->
+
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_rectangle"
+        android:text="@string/nextbtn"
+        android:layout_below="@+id/txt_head"
+        android:textColor="@color/white"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+        android:layout_marginRight="@dimen/center_info_left_righ_margin"
+        android:textSize="@dimen/text_normal"
+
+        android:layout_marginBottom="40dp" />
+    <Button
+        android:id="@+id/btn_next_four"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/login_rectangle"
+        android:text="@string/nextbtn_four"
+        android:textColor="@color/white"
+        android:layout_below="@+id/btn_next"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="@dimen/center_info_left_righ_margin"
+        android:layout_marginRight="@dimen/center_info_left_righ_margin"
+        android:textSize="@dimen/text_normal"
+
+        android:layout_marginBottom="40dp" />
+
+
+
+
+</RelativeLayout>

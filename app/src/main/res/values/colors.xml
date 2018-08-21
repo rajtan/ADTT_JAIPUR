@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#043536</color>
+    <color name="white">#fff</color>
+    <color name="darkblue">#0f859f</color>
+    <!--<color name="dash_bg_color">#EEF2F5</color>-->
+    <color name="black">#000000</color>
+    <color name="home_bg_color">#e8edef</color>
+    <color name="bg_color">#E9F4FA</color>
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+    <color name="back_bg_color">#f1f1f1</color>
+ <color name="retest_col">#FFAE02</color>
+    <color name="namecol">#96590a</color>
+</resources>

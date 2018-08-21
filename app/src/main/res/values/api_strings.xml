@@ -1,0 +1,8 @@
+<resources>
+
+        <!--<string name="api_login">api_loginwithcenterno.php</string>-->
+        <!--<string name="api_detail">api_examlogindata.php</string>-->
+        <!--<string name="api_list">api_datewiseList.php</string>-->
+        <!--<string name="api_verify">api_verifyotp.php</string>-->
+        <!--<string name="api_resend">api_resendotp.php</string>-->
+</resources>

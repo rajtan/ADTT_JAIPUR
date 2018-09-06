@@ -1,6 +1,7 @@
 package com.rto_driving_test_rajasthan.Authorization;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -34,7 +35,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URISyntaxException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,20 +59,30 @@ public class VerifyActivity extends BaseActivity implements AuthBfdCap, OnClickL
     String path = null;
     private Button btnVerify;
     private MorphoTabletFPSensorDevice fpSensorCap;
-
     private ImageView imgFP;
     boolean isWorking = false;
     RequestQueue requestQueue;
-    String ll_no,dltest_seq,cov_cd,card_num,track_id,machine_id,cam_type="";
+    String ll_no,dltest_seq,cov_cd,card_num,track_id,machine_id="";
+    String cam_type="0";
     int check=1;
     public boolean AuthComplete = false;
     Handler handler = new Handler(Looper.getMainLooper());
+
+    SharedPreferences sp;
+    public String MYPREF="testtrack";
+    SharedPreferences.Editor editor;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify);
         ButterKnife.bind(this);
         setAppBar("Authentication", true);
+
+        sp=getApplicationContext().getSharedPreferences(MYPREF,MODE_PRIVATE);
+        editor=sp.edit();
+
 ////String ll_no,dltest_seq,cov_cd,card_num,track_id,machine_id,cam_type="";
         Bundle bundle=getIntent().getExtras();
         ll_no=bundle.getString("ll_no");
@@ -202,11 +217,21 @@ public class VerifyActivity extends BaseActivity implements AuthBfdCap, OnClickL
     }
 
     private void getsocketapi() {
+        String url="";
         //LLNO,DLTEST_SEQ ,COV_CD,CARD_NUMBER,TRACK_ID,MACHINE_ID,CAM_TYPE
         Log.e("BUNDEL_DATA",ll_no +"\n"+dltest_seq+"\n"+cov_cd+"\n"+card_num+"\n"+track_id+"\n"+machine_id+"\n"+cam_type);
         //String url1= ApiClient.BASE_URL+"ADTT_DataInter.svc/Set_ApplicationInfo/ll_no/dltest_seq/cov_cd/card_num/track_id/machine_id/cam_type";
-        String url= ApiClient.BASE_URL+"ADTT_DataInter.svc/Set_ApplicationInfo/"+ll_no+"/"+dltest_seq+"/"+cov_cd+"/"+card_num+"/"+track_id+"/"+machine_id+"/"+cam_type;
 
+        if(cam_type.equalsIgnoreCase("") || cam_type.equalsIgnoreCase(null)){
+            cam_type="0";
+            url= ApiClient.BASE_URL+"ADTT_DataInter.svc/Set_ApplicationInfo/"+ll_no+"/"+dltest_seq+"/"+cov_cd+"/"+card_num+"/"+track_id+"/"+machine_id+"/"+cam_type;
+        }
+        else {
+            url= ApiClient.BASE_URL+"ADTT_DataInter.svc/Set_ApplicationInfo/"+ll_no+"/"+dltest_seq+"/"+cov_cd+"/"+card_num+"/"+track_id+"/"+machine_id+"/"+cam_type;
+        }
+
+
+        createtext(url);
         Log.e("MYSOCKETURL",url);
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
@@ -226,8 +251,10 @@ public class VerifyActivity extends BaseActivity implements AuthBfdCap, OnClickL
                     intent.putExtra("response","RESPONSE");
                     startActivity(intent);
                     finish();*/
-
+                    editor.putString("teststate","NO");
+                    editor.commit();
                    onBackPressed();
+
                     finish();
 
                 } catch (JSONException e) {
@@ -317,5 +344,39 @@ public class VerifyActivity extends BaseActivity implements AuthBfdCap, OnClickL
         finish();*/
         finish();
 
+    }
+
+    private void createtext(String url) {
+
+        //String url="http://192.168.20.40:1300/simpleserver/machineip";
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd");
+        Date now = new Date();
+        //String fileName = formatter.format(now) + ".txt";//like 2016_01_12.txt
+        String fileName = "ADTT_JAIPUR_LOG" + ".txt";//like 2016_01_12.txt
+
+
+        try
+        {
+            File root = new File(Environment.getExternalStorageDirectory()+File.separator+"ADTT_JAIPUR", "Log Files");
+            //File root = new File(Environment.getExternalStorageDirectory(), "Notes");
+            if (!root.exists())
+            {
+                root.mkdirs();
+            }
+            File gpxfile = new File(root, fileName);
+
+
+            FileWriter writer = new FileWriter(gpxfile,true);
+            writer.append(url+"\n\n");
+            writer.flush();
+            writer.close();
+            Toast.makeText(this, "Data has been written to Report File", Toast.LENGTH_SHORT).show();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+
+        }
     }
 }

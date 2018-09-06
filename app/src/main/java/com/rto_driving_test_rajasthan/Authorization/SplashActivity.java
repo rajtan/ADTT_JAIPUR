@@ -48,9 +48,11 @@ public class SplashActivity extends BaseActivity {
     private static final int REQUEST_CODE_PERMISSION = 2;
 Context context;
 
-    SharedPreferences sp;
+    SharedPreferences sp,spone;
     SharedPreferences.Editor editor;
     public static String MY_PREF="ipadd";
+    public static String MYTESTPREF="testtrack";
+    String testState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,8 @@ Context context;
         setContentView(R.layout.activity_splash_acivity);
 
         sp=getApplicationContext().getSharedPreferences(MY_PREF,Context.MODE_PRIVATE);
+        spone=getApplicationContext().getSharedPreferences(MYTESTPREF,Context.MODE_PRIVATE);
+        testState=spone.getString("teststate","");
         String ipaddress=sp.getString("ipaddress","");
         context = this;
         checkPermissions();
@@ -98,8 +102,18 @@ Context context;
             new Handler().postDelayed(new TimerTask() {
                 @Override
                 public void run() {
-                    startActivity(new Intent(SplashActivity.this, HomeActivity.class));
-                    finishAllActivities();
+
+                    if(testState.equalsIgnoreCase("NO")){
+
+                        startActivity(new Intent(getApplicationContext(),ApplicantInfoActivity.class));
+                        finishAllActivities();
+                    }
+                    else {
+
+                        startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+                        finishAllActivities();
+                    }
+
 
 //                    if (Utility.isConnectingToInternet(context)) {
 //                        new CheckVersion(context).execute();

@@ -149,23 +149,15 @@
                                     />
                                 <TextView
                                     android:id="@+id/tv_dob"
-
                                     android:layout_width="0dp"
                                     android:layout_weight=".6"
                                     android:layout_height="wrap_content"
-
-
                                     android:gravity="left"
                                     android:text="ID:24020202023"
                                     android:paddingLeft="10dp"
-
                                     android:textSize="@dimen/textspin" />
                             </LinearLayout>
-
                         </LinearLayout>
-
-
-
                         <RelativeLayout
                             android:id="@+id/rl_date"
                             android:layout_width="@dimen/imgwidth"
@@ -179,14 +171,7 @@
                                android:padding="5dp"
                                 android:src="@drawable/pic" />
                         </RelativeLayout>
-
-
-
-
                     </RelativeLayout>
-
-
-
                 </android.support.v7.widget.CardView>
                 <TextView
                     android:id="@+id/selectcam_txt"
@@ -350,8 +335,11 @@
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:gravity="center"
+                        android:elevation="20dp"
                         android:padding="30dp"
-                        android:background="@color/colorPrimary"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:background="@drawable/ripple"
                         >
 
                         <ImageView
@@ -359,7 +347,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/bike"
-                            android:visibility="visible"
+                            android:visibility="gone"
 
                             />
                         <ImageView

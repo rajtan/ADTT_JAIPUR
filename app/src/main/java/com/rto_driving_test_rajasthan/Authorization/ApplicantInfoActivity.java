@@ -106,39 +106,41 @@ public class ApplicantInfoActivity extends BaseActivity {
     String response_infodata;
     int check=0;
     String vehtype="";
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_applicant_info);
         ButterKnife.bind(this);
         setAppBar("Applicant Information", true);
-        //userInfo();
-        // ad=new ArrayList<>();
         responsedata=getApplicationContext().getSharedPreferences(MY_RESPONSE, Context.MODE_PRIVATE);
         vehstatus=getApplicationContext().getSharedPreferences(VEHICALTYPE, Context.MODE_PRIVATE);
         response_infodata=responsedata.getString("response_info","");
         vehtype=vehstatus.getString("vehicaltype","");
         Log.e("VEHICAL TYPE",vehtype);
-        if(vehtype.equals("FW"))
+        /*if(vehtype.equalsIgnoreCase("FW"))
         {
             imgstartbike.setVisibility(View.GONE);
             imgstart.setVisibility(View.VISIBLE);
-            /*imgstart.setVisibility(View.GONE);
-            imgstartbike.setVisibility(View.VISIBLE);*/
+            *//*imgstart.setVisibility(View.GONE);
+            imgstartbike.setVisibility(View.VISIBLE);*//*
 
         }
-        else {/*
+        else if (vehtype.equalsIgnoreCase("TW")){*//*
             imgstartbike.setVisibility(View.GONE);
-            imgstart.setVisibility(View.VISIBLE);*/
+            imgstart.setVisibility(View.VISIBLE);*//*
             imgstart.setVisibility(View.GONE);
             imgstartbike.setVisibility(View.VISIBLE);
             selectCamcardView.setVisibility(View.GONE);
             selectCamTXT.setVisibility(View.GONE);
         }
+        else {
+
+            imgstart.setVisibility(View.VISIBLE);
+            imgstartbike.setVisibility(View.VISIBLE);
+            selectCamcardView.setVisibility(View.VISIBLE);
+            selectCamTXT.setVisibility(View.VISIBLE);
+
+        }*/
         //act_type=getIntent().getStringExtra("act_type");
         //response=getIntent().getStringExtra("response");
         //Log.e("act_type",act_type);
@@ -279,44 +281,8 @@ public class ApplicantInfoActivity extends BaseActivity {
         return Html.fromHtml(html).toString();
     }
 
-    /*private void createtext(String url) {
-
-        //String url="http://192.168.20.40:1300/simpleserver/machineip";
-
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd");
-        Date now = new Date();
-        //String fileName = formatter.format(now) + ".txt";//like 2016_01_12.txt
-        String fileName = "ADTT_JAIPUR_LOG" + ".txt";//like 2016_01_12.txt
-
-
-        try
-        {
-            File root = new File(Environment.getExternalStorageDirectory()+File.separator+"ADTT_JAIPUR", "Log Files");
-            //File root = new File(Environment.getExternalStorageDirectory(), "Notes");
-            if (!root.exists())
-            {
-                root.mkdirs();
-            }
-            File gpxfile = new File(root, fileName);
-
-
-            FileWriter writer = new FileWriter(gpxfile,true);
-            writer.append(url+"\n\n");
-            writer.flush();
-            writer.close();
-            Toast.makeText(this, "Data has been written to Report File", Toast.LENGTH_SHORT).show();
-        }
-        catch(IOException e)
-        {
-            e.printStackTrace();
-
-        }
-    }*/
-
     private void userInfovoll(String response1) {
-
         Log.e("RESPONSE DATA",response1);
-
         try {
             JSONObject jsonObject = new JSONObject(response1);
             Log.e("JSONOBJECT1", jsonObject.toString());
@@ -327,19 +293,15 @@ public class ApplicantInfoActivity extends BaseActivity {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject2 = jsonArray.getJSONObject(i);
                 //LLNO,DLTEST_SEQ ,COV_CD,CARD_NUMBER,TRACK_ID,MACHINE_ID,CAM_TYPE
-
                 ll_no=jsonObject2.optString("APPLNO");
                 dltest_seq=jsonObject2.optString("DLTEST_SEQ");
                 cov_cd=jsonObject2.optString("COV_CD");
                 card_num=jsonObject2.optString("CARD_NUMBER");
-
-
                 tv_name.setText("" + jsonObject2.getString("FIRST_NAME"));
                 tv_id.setText("" + jsonObject2.getString("LLNO"));
                 String imgbyte = jsonObject2.getString("IMAGE");
                 tv_app.setText("" + jsonObject2.optString("APPLNO"));
                 tv_dob.setText("" + jsonObject2.optString("DOB"));
-
                 CommonFunctions.LEFTTEMPLATEPATH=jsonObject2.optString("THUMB");
                 Log.e("LEFTTEMPLATEPATH",CommonFunctions.LEFTTEMPLATEPATH);
                 byte[] decodedString = Base64.decode(imgbyte, Base64.DEFAULT);
@@ -353,7 +315,6 @@ public class ApplicantInfoActivity extends BaseActivity {
             Log.e("DASHBOARD CAMERA ARRAY", "" + dashcam.length());
             if(dashcam !=null )
             {
-
                 for (int j = 0; j < dashcam.length(); j++) {
                     JSONObject jsonObject2 = dashcam.getJSONObject(j);
                     String listcam = jsonObject2.optString("CAM_IP");
@@ -362,12 +323,9 @@ public class ApplicantInfoActivity extends BaseActivity {
                 }
                 Log.e("listcam", "" + ad.size());
                 Log.e("jsonArray", jsonArray.toString());
-
             }
             else {
-
                 Log.e("DASHBOARD CAMLIST","DASHBOARD CAM IS NULL BECAUSE ITS BIKE TEST");
-
             }
             ad_ter = new ArrayList<>();
             machineip=new ArrayList<>();
@@ -476,7 +434,7 @@ public class ApplicantInfoActivity extends BaseActivity {
         super.onResume();
         if(TextUtils.isEmpty(Config.MACHINE_IP))
         {
-            startbtn.setVisibility(View.GONE);
+            startbtn.setVisibility(View.VISIBLE);
             /*startbtn.setVisibility(View.VISIBLE);*/
         }
         else {

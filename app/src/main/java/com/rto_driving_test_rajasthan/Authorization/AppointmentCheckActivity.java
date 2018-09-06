@@ -131,7 +131,7 @@ public class AppointmentCheckActivity extends BaseActivity {
         progressDialog.show();
         //http://192.168.1.229/ADTT_Data/
         Log.e("BASEURL", ApiClient.BASE_URL);
-        String myurl="http://192.168.1.229:1300/simpleserver/";
+        //String myurl="http://192.168.1.229:1300/simpleserver/";
         String url = ApiClient.BASE_URL+"ADTT_DataInter.svc/Get_ApplicantInfo/"+trackid+"/"+testtype;
         Log.e("URL",url);
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {

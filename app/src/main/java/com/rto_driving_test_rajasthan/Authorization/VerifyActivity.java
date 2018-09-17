@@ -107,15 +107,17 @@ public class VerifyActivity extends BaseActivity implements AuthBfdCap, OnClickL
         Log.e("BUNDEL_DATA",ll_no +"\n"+dltest_seq+"\n"+cov_cd+"\n"+card_num+"\n"+track_id+"\n"+machine_id+"\n"+cam_type);
         Log.e("LEFTTEMPLATEPATH",CommonFunctions.LEFTTEMPLATEPATH);
 
-        editor.putString("teststate","NO");
+       /* editor.putString("teststate","NO");
         editor.commit();
         editorone.putString("type","TW");
         editorone.commit();
         editortwo.putString("socket_machinip","192.168.10.115");
         editortwo.commit();
         Config.MACHINE_IP="192.168.10.115";
+          editorthree.putString("camip",camip);
+            editorthree.commit();
 
-        onBackPressed();
+        onBackPressed();*/
 
         requestQueue= Volley.newRequestQueue(this);
         initGUI();
@@ -228,18 +230,21 @@ public class VerifyActivity extends BaseActivity implements AuthBfdCap, OnClickL
 
 
                                         /* for testing only  start*/
-                                 /*   editor.putString("teststate","NO");
+                                    editor.putString("teststate","NO");
                                     editor.commit();
                                     editorone.putString("type","TW");
                                     editorone.commit();
                                     editortwo.putString("socket_machinip","192.168.10.115");
                                     editortwo.commit();
-                                    Config.MACHINE_IP="192.168.10.115";
+                                    editorthree.putString("camip","");
+                                    editorthree.commit();
+                                    //Config.MACHINE_IP="192.168.10.115";
 
-                                    onBackPressed();*/
+
+                                    onBackPressed();
 
                                     /* for testing only  end*/
-                                        getsocketapi();
+                                       // getsocketapi();
 
 
 

@@ -9,13 +9,17 @@ import android.graphics.BitmapFactory;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +30,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.rto_driving_test_rajasthan.Models.Applicantdata;
 import com.rto_driving_test_rajasthan.Models.Camtype;
 import com.rto_driving_test_rajasthan.R;
 
@@ -34,6 +39,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,7 +52,7 @@ import utility.ConnectionDetector;
 
 
 public class AppointmentCheckActivity extends BaseActivity {
-    
+
     @BindView(R.id.proceedbtn_Appcheck)
     LinearLayout proceedbtn;
 
@@ -70,6 +76,7 @@ public class AppointmentCheckActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_appointment_check);
         ButterKnife.bind(this);
+
         responsedata=getApplicationContext().getSharedPreferences(MY_RESPONSE, Context.MODE_PRIVATE);
         vehtype=getApplicationContext().getSharedPreferences(VEHICALTYPE, Context.MODE_PRIVATE);
         trackingid=getApplicationContext().getSharedPreferences(TRACK_ID, Context.MODE_PRIVATE);
@@ -89,10 +96,19 @@ public class AppointmentCheckActivity extends BaseActivity {
         if (!ConnectionDetector.isConnected(getApplicationContext())) {
 
             Toast.makeText(getApplicationContext(), "Check Network Connection", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(getApplicationContext(),ApplicantListActivity.class));
+            finishAllActivities();
 
         }else {
 
-            userInfovoll();
+            startActivity(new Intent(getApplicationContext(),ApplicantListActivity.class));
+
+           /* Intent intent=new Intent(getApplicationContext(),ApplicantListActivity.class);
+                                *//*intent.putExtra("response",response);
+                                intent.putExtra("act_type","APPOINT_CHECK");*//*
+            startActivity(intent);
+            finish();*/
+            //userInfovoll();
         }
 
     }
@@ -125,10 +141,15 @@ public class AppointmentCheckActivity extends BaseActivity {
     }
 
     private void userInfovoll() {
-        progressDialog=new ProgressDialog(AppointmentCheckActivity.this);
-        progressDialog.setMessage("PLEASE WAIT FETCHING APPLICANT INFORMATION");
-        progressDialog.setTitle("TRYING TO FETCH");
-        progressDialog.show();
+
+        try {
+            progressDialog=new ProgressDialog(AppointmentCheckActivity.this);
+            progressDialog.setMessage("PLEASE WAIT FETCHING APPLICANT INFORMATION");
+            progressDialog.setTitle("TRYING TO FETCH");
+            progressDialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         //http://192.168.1.229/ADTT_Data/
         Log.e("BASEURL", ApiClient.BASE_URL);
         //String myurl="http://192.168.1.229:1300/simpleserver/";
@@ -155,6 +176,7 @@ public class AppointmentCheckActivity extends BaseActivity {
 
                      //countDownTimer.start();
                         timer();
+
                     }
                     else {
 
@@ -162,14 +184,40 @@ public class AppointmentCheckActivity extends BaseActivity {
                             {
                                 countDownTimer.cancel();
                             }
-                        editor.putString("response_info",response);
-                        editor.commit();
 
-                        Intent intent=new Intent(getApplicationContext(),ApplicantInfoActivity.class);
-                        /*intent.putExtra("response",response);
-                        intent.putExtra("act_type","APPOINT_CHECK");*/
-                        startActivity(intent);
-                        finish();
+                            JSONObject jsonapplicant=new JSONObject(response);
+                            JSONObject result_obj=jsonapplicant.getJSONObject("Result");
+                            JSONArray applicantjsonArray=result_obj.getJSONArray("Applicant_Data");
+
+                        Log.e("APPLICATIONDATA",applicantjsonArray.length()+"");
+                            if(applicantjsonArray.length()<=1){
+                                editor.putString("response_info",response);
+                                editor.commit();
+                                Intent intent=new Intent(getApplicationContext(),ApplicantInfoActivity.class);
+                                /*intent.putExtra("response",response);
+                                intent.putExtra("act_type","APPOINT_CHECK");*/
+                                startActivity(intent);
+                                finish();
+                                }
+                            else {
+
+                                editor.putString("response_info",response);
+                                editor.commit();
+
+                                //Intent intent=new Intent(getApplicationContext(),ApplicantListActivity.class);
+                                /*intent.putExtra("response",response);
+                                intent.putExtra("act_type","APPOINT_CHECK");*/
+                                Intent intent=new Intent(getApplicationContext(),ApplicantListActivity.class);
+                                startActivity(intent);
+                                finish();
+                                // Toast.makeText(getApplicationContext(), "ARRAY GREATER THEN ZERO", Toast.LENGTH_SHORT).show();
+
+
+                            }
+
+
+
+
 
 
 
@@ -209,4 +257,9 @@ public class AppointmentCheckActivity extends BaseActivity {
         }
         //countDownTimer.cancel();
     }
+
+
+
+
+
 }

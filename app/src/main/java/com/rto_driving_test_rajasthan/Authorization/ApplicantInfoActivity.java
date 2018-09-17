@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.widget.CardView;
@@ -28,13 +29,21 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 import com.rto_driving_test_rajasthan.Models.Camtype;
 import com.rto_driving_test_rajasthan.R;
 import org.json.JSONArray;
@@ -46,6 +55,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.StringTokenizer;
 
@@ -57,6 +67,7 @@ import utility.BaseActivity;
 import utility.CommonFunctions;
 import utility.Config;
 import utility.ConnectionDetector;
+import utility.HttpHandler;
 
 
 public class ApplicantInfoActivity extends BaseActivity {
@@ -92,20 +103,52 @@ public class ApplicantInfoActivity extends BaseActivity {
             ImageView imgstartbike;
     @BindView(R.id.selectcam_card)
     CardView selectCamcardView;
+
+    @BindView(R.id.btncard)
+    CardView btncardvi;
+
+    @BindView(R.id.card_termin)
+    CardView selectterminal;
+
+    @BindView(R.id.homelin)
+    LinearLayout linearhome;
+
+    @BindView(R.id.selectterminal_txt)
+    TextView sel_ter_txt;
+
+
+
+    @BindView(R.id.msg_lin)
+    LinearLayout msgliner;
+
+    @BindView(R.id.txt_terminal)
+    TextView teminaltext;
+    @BindView(R.id.txt_camip)
+    TextView selectcam;
+
     @BindView(R.id.selectcam_txt)
             TextView selectCamTXT;
     ProgressDialog progressDialog=null;
-    String response,act_type;
+    String myresponse,act_type;
     //LLNO,DLTEST_SEQ ,COV_CD,CARD_NUMBER,TRACK_ID,MACHINE_ID,CAM_TYPE
-    String ll_no,dltest_seq,cov_cd,card_num,track_id,machine_id,cam_type="";
+    String ll_no,dltest_seq,cov_cd,card_num,track_id,machine_id,cam_type,camip="";
     String macnip="";
-    SharedPreferences responsedata,vehstatus;
+    String mcamip="";
+    SharedPreferences responsedata,vehstatus,trackstaus,vehicaltype,sptwo,spthree;
     SharedPreferences.Editor editor;
     public static String MY_RESPONSE="response";
     public static String VEHICALTYPE="track_id";
+    public String MYPREF="testtrack";
+    public String MYPREFVEHICAL="typetest";
+    public String MYPREFTWO="machineipsock";
+    public String MYPREFTHREE="camiptxt";
+    SharedPreferences.Editor editortrack,editortwo;
     String response_infodata;
+
     int check=0;
     String vehtype="";
+    private ProgressDialog pDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,20 +157,74 @@ public class ApplicantInfoActivity extends BaseActivity {
         setAppBar("Applicant Information", true);
         responsedata=getApplicationContext().getSharedPreferences(MY_RESPONSE, Context.MODE_PRIVATE);
         vehstatus=getApplicationContext().getSharedPreferences(VEHICALTYPE, Context.MODE_PRIVATE);
+        trackstaus=getApplicationContext().getSharedPreferences(MYPREF,Context.MODE_PRIVATE);
+        vehicaltype=getApplicationContext().getSharedPreferences(MYPREFVEHICAL,Context.MODE_PRIVATE);
+        sptwo=getApplicationContext().getSharedPreferences(MYPREFTWO,Context.MODE_PRIVATE);
+        spthree=getApplicationContext().getSharedPreferences(MYPREFTHREE,Context.MODE_PRIVATE);
+        editortrack=trackstaus.edit();
+        editortwo=sptwo.edit();
+        String trackst=trackstaus.getString("teststate","");
+        String vehicalt=vehicaltype.getString("type","");
+
+
+
         response_infodata=responsedata.getString("response_info","");
         vehtype=vehstatus.getString("vehicaltype","");
         Log.e("VEHICAL TYPE",vehtype);
-        /*if(vehtype.equalsIgnoreCase("FW"))
+        if(trackst.equalsIgnoreCase("NO") && vehicalt.equalsIgnoreCase("FW")){
+
+            imgstartbike.setVisibility(View.GONE);
+            startbtn.setVisibility(View.VISIBLE);
+            imgstart.setVisibility(View.VISIBLE);
+            spinnerterminal.setVisibility(View.GONE);
+            teminaltext.setText(Config.MACHINE_IP);
+            teminaltext.setVisibility(View.VISIBLE);
+            mcamip=spthree.getString("camip","");
+            selectcam.setText(""+mcamip);
+            spDist.setVisibility(View.GONE);
+            selectcam.setVisibility(View.VISIBLE);
+
+
+
+
+        }
+        else if(trackst.equalsIgnoreCase("NO") && vehicalt.equalsIgnoreCase("TW")){
+
+            imgstart.setVisibility(View.GONE);
+            imgstartbike.setVisibility(View.VISIBLE);
+            selectCamcardView.setVisibility(View.GONE);
+            selectCamTXT.setVisibility(View.GONE);
+
+            spinnerterminal.setVisibility(View.GONE);
+            teminaltext.setText(Config.MACHINE_IP);
+            teminaltext.setVisibility(View.VISIBLE);
+
+
+
+            selectcam.setVisibility(View.GONE);
+
+
+        }
+        else {
+
+            Log.e("trackstatus","TRACK STATUS IS NULL");
+
+            teminaltext.setText(Config.MACHINE_IP);
+            teminaltext.setVisibility(View.GONE);
+            spinnerterminal.setVisibility(View.VISIBLE);
+            selectcam.setVisibility(View.GONE);
+        }
+
+        if(vehtype.equalsIgnoreCase("FW"))
         {
             imgstartbike.setVisibility(View.GONE);
             imgstart.setVisibility(View.VISIBLE);
-            *//*imgstart.setVisibility(View.GONE);
-            imgstartbike.setVisibility(View.VISIBLE);*//*
+           /* imgstart.setVisibility(View.GONE);
+            imgstartbike.setVisibility(View.VISIBLE);*/
 
         }
-        else if (vehtype.equalsIgnoreCase("TW")){*//*
-            imgstartbike.setVisibility(View.GONE);
-            imgstart.setVisibility(View.VISIBLE);*//*
+        else if (vehtype.equalsIgnoreCase("TW")){
+
             imgstart.setVisibility(View.GONE);
             imgstartbike.setVisibility(View.VISIBLE);
             selectCamcardView.setVisibility(View.GONE);
@@ -140,7 +237,11 @@ public class ApplicantInfoActivity extends BaseActivity {
             selectCamcardView.setVisibility(View.VISIBLE);
             selectCamTXT.setVisibility(View.VISIBLE);
 
-        }*/
+        }
+
+
+
+
         //act_type=getIntent().getStringExtra("act_type");
         //response=getIntent().getStringExtra("response");
         //Log.e("act_type",act_type);
@@ -175,7 +276,7 @@ public class ApplicantInfoActivity extends BaseActivity {
     }
 
 
-    @OnClick({R.id.biometricLin,R.id.start_btn})
+    @OnClick({R.id.biometricLin,R.id.start_btn,R.id.homelin})
     public void click(View view){
         switch (view.getId())
         {
@@ -193,6 +294,7 @@ public class ApplicantInfoActivity extends BaseActivity {
                 bundle.putString("cam_type",cam_type);
                 bundle.putString("leftthumb",cam_type);
                 bundle.putString("rightthumb",cam_type);
+                bundle.putString("selectedcamip",camip);
                 /*intent.putExtra("leftthumb", CommonFunctions.LEFTTEMPLATEPATH);
                 intent.putExtra("rightthumb",CommonFunctions.RIGHTTEMPLATEPATH);*/
                 intent.putExtras(bundle);
@@ -200,12 +302,37 @@ public class ApplicantInfoActivity extends BaseActivity {
                 //finish();
 
                 break;
+            case R.id.homelin:
+                onBackPressed();
+                break;
+
             case R.id.start_btn:
+
+                /*Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm:ss");
+                String strDate = "Current Time when Button Click : " + mdformat.format(calendar.getTime());
+                createtext(strDate);*/
+
                 if(!TextUtils.isEmpty(Config.MACHINE_IP))
                 {
-                    callSOCKETAPI();
 
-                }else {
+                        //callSOCKETAPI();
+                    //callSOCKETAPIHTTP();
+
+                   /* editortwo.clear();
+                    editortwo.commit();
+                    startActivity(new Intent(getApplicationContext(),AppointmentCheckActivity.class));
+                    finish();*/
+
+                    webViewSocketApi();
+
+
+
+                }
+                /*else if(trackstaus.getString("teststate","").equalsIgnoreCase("NO")){
+                    callSOCKETAPI();
+                }*/
+                    else {
                     Toast.makeText(getApplicationContext(), "PLEASE AUTHONTICATE APPLICANT", Toast.LENGTH_SHORT).show();
 
                 }
@@ -213,24 +340,60 @@ public class ApplicantInfoActivity extends BaseActivity {
         }
     }
 
+    private void callSOCKETAPIHTTP() {
+
+        new StartTest().execute();
+    }
+
+
+    public void webViewSocketApi(){
+
+        String url="http://"+Config.MACHINE_IP+":1300"+"/simpleserver/";
+
+        Ion.with(getApplicationContext()).load(url).asString().setCallback(new FutureCallback<String>() {
+            @Override
+            public void onCompleted(Exception e, String result) {
+
+                if(!TextUtils.isEmpty(result)){
+                    String output=stripHtml(result);
+
+                    StringTokenizer stringTokenizer=new StringTokenizer(output,"#");
+                    String value=stringTokenizer.nextToken();
+                    String value1=stringTokenizer.nextToken();
+                    int myval=Integer.parseInt(value1);
+                    if(myval==0){
+                        Toast.makeText(ApplicantInfoActivity.this, "TEST NOT TRIGGER", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "Test Started", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(),AppointmentCheckActivity.class));
+                        finish();
+                        //Config.MACHINE_IP="";
+                        editortrack.putString("teststate","YES");
+                        editortrack.commit();
+
+                        editortwo.putString("socket_machinip","");
+                        editortwo.commit();
+
+                         Config.MACHINE_IP="";
+                    }
+
+                }
+
+
+            }
+        });
+
+    }
+
     private void callSOCKETAPI() {
-       // String url="http://192.168.1.229:1300/simpleserver/"+Config.MACHINE_IP;
 
-       /* String baseurl=ApiClient.BASE_URL;
-        StringTokenizer stringTokenizer=new StringTokenizer(baseurl,"/");
-        String str1=stringTokenizer.nextToken();
-        String str2=stringTokenizer.nextToken();
-        String str3=stringTokenizer.nextToken();*/
-        //String str4=stringTokenizer.nextToken();
-
-        //String newurl=str1+"://"+str2+":1300"+"/";
-
-        //String url="http://"+macnip+":1300"+"/simpleserver/"+Config.MACHINE_IP;
         String url="http://"+macnip+":1300"+"/simpleserver/";
-        //Log.e("TOKEN",str1 +"\n"+str2+"\n"+str3);
-        //Log.e("BASE URL",baseurl);
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm:ss");
+        String strDate = "Current Time when CALL API : " + mdformat.format(calendar.getTime());
+        // createtext(strDate);
 
-        //createtext(url);
 
         //String url=ApiClient.BASE_URL+"simpleserver/"+Config.MACHINE_IP;
        // String url=newurl+"simpleserver/"+Config.MACHINE_IP;
@@ -238,42 +401,97 @@ public class ApplicantInfoActivity extends BaseActivity {
             @Override
             public void onResponse(String response) {
 
-                Log.e("RESPONSE>>>>>>>>>>>>>",response);
-                Log.e("HTML RESPONSE",stripHtml(response));
+                /*Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm:ss");
+                String strDate = "Current Time when RESPONSE : " + mdformat.format(calendar.getTime());
+                createtext(strDate);*/
+
+
 
                 StringTokenizer stringTokenizer=new StringTokenizer(stripHtml(response),"#");
                 String value=stringTokenizer.nextToken();
                 String value1=stringTokenizer.nextToken();
-
-
-                //String value2=stringTokenizer.nextToken();
-                Log.e("VALUE",value+""+value1);
                 int myval=Integer.parseInt(value1);
                 if(myval==0){
                     Toast.makeText(ApplicantInfoActivity.this, "TEST NOT TRIGGER", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    Config.MACHINE_IP="";
+                    Toast.makeText(getApplicationContext(), "Test Started", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(getApplicationContext(),AppointmentCheckActivity.class));
                     finish();
                     Config.MACHINE_IP="";
+                    editortrack.putString("teststate","YES");
+                    editortrack.commit();
+
+                   // Config.MACHINE_IP="";
                 }
-
-                /*if(value.equals("0")){
-                    startActivity(new Intent(getApplicationContext(),HomeActivity.class));
-                    finish();
-                }*/
-
             }
         }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(VolleyError volleyError) {
 
-                Toast.makeText(getApplicationContext(), "SERVER RESPONSE" + error.toString(), Toast.LENGTH_SHORT).show();
+
+
+                String message=null;
+                if (volleyError instanceof NetworkError) {
+                    message = "Cannot connect to Internet...Please check your connection!";
+                    Toast.makeText(getApplicationContext(), "SERVER RESPONSE" + message, Toast.LENGTH_SHORT).show();
+                } else if (volleyError instanceof ServerError) {
+                    message = "The server could not be found. Please try again after some time!!";
+                    Toast.makeText(getApplicationContext(), "SERVER RESPONSE" + message, Toast.LENGTH_SHORT).show();
+                } else if (volleyError instanceof AuthFailureError) {
+                    message = "Cannot connect to Internet...Please check your connection!";
+                    Toast.makeText(getApplicationContext(), "SERVER RESPONSE" + message, Toast.LENGTH_SHORT).show();
+                } else if (volleyError instanceof ParseError) {
+                    message = "Parsing error! Please try again after some time!!";
+                    Toast.makeText(getApplicationContext(), "SERVER RESPONSE" + message, Toast.LENGTH_SHORT).show();
+                } else if (volleyError instanceof NoConnectionError) {
+                    message = "Cannot connect to Internet...Please check your connection!";
+                    Toast.makeText(getApplicationContext(), "SERVER RESPONSE" + message, Toast.LENGTH_SHORT).show();
+                } else if (volleyError instanceof TimeoutError) {
+                    message = "Connection TimeOut! Please check your internet connection.";
+                    Toast.makeText(getApplicationContext(), "SERVER RESPONSE" + message, Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
             requestQueue.add(stringRequest);
+    }
+
+
+
+    private void createtext(String url) {
+
+        //String url="http://192.168.20.40:1300/simpleserver/machineip";
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd");
+        Date now = new Date();
+        //String fileName = formatter.format(now) + ".txt";//like 2016_01_12.txt
+        String fileName = "ADTT_JAIPUR_TIME_LOG" + ".txt";//like 2016_01_12.txt
+
+
+        try
+        {
+            File root = new File(Environment.getExternalStorageDirectory()+File.separator+"ADTT_JAIPUR", "Log Files");
+            //File root = new File(Environment.getExternalStorageDirectory(), "Notes");
+            if (!root.exists())
+            {
+                root.mkdirs();
+            }
+            File gpxfile = new File(root, fileName);
+
+
+            FileWriter writer = new FileWriter(gpxfile,true);
+            writer.append(url+"\n\n");
+            writer.flush();
+            writer.close();
+            Toast.makeText(this, "Data has been written to Report File", Toast.LENGTH_SHORT).show();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+
+        }
     }
 
     public String stripHtml(String html)
@@ -338,9 +556,30 @@ public class ApplicantInfoActivity extends BaseActivity {
                 ad_ter.add(testtu);
             }
             arrayAdapter = new ArrayAdapter<String>(ApplicantInfoActivity.this, R.layout.spin_item, ad);
-            adapterterminal = new ArrayAdapter<String>(ApplicantInfoActivity.this, R.layout.spin_item, ad_ter);
             spDist.setAdapter(arrayAdapter);
-            spinnerterminal.setAdapter(adapterterminal);
+
+            if(ad_ter.size()>0){
+                msgliner.setVisibility(View.GONE);
+                biometric.setVisibility(View.VISIBLE);
+                adapterterminal = new ArrayAdapter<String>(ApplicantInfoActivity.this, R.layout.spin_item, ad_ter);
+                spinnerterminal.setAdapter(adapterterminal);
+            }
+            else {
+
+
+                biometric.setVisibility(View.GONE);
+                selectCamcardView.setVisibility(View.INVISIBLE);
+                selectterminal.setVisibility(View.INVISIBLE);
+                selectCamTXT.setVisibility(View.INVISIBLE);
+                sel_ter_txt.setVisibility(View.INVISIBLE);
+                btncardvi.setVisibility(View.INVISIBLE);
+                 msgliner.setVisibility(View.VISIBLE);
+
+
+            }
+
+
+
 
             spDist.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
@@ -350,6 +589,8 @@ public class ApplicantInfoActivity extends BaseActivity {
                         JSONObject jsonObject2=dashcam.getJSONObject(i);
                         Log.e("CAM TYPE",jsonObject2.optString("CAM_TYPE"));
                         cam_type=jsonObject2.optString("CAM_TYPE");
+                        camip=jsonObject2.optString("CAM_IP");
+                        Log.e("CAMIP",camip);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -434,11 +675,15 @@ public class ApplicantInfoActivity extends BaseActivity {
         super.onResume();
         if(TextUtils.isEmpty(Config.MACHINE_IP))
         {
-            startbtn.setVisibility(View.VISIBLE);
+            startbtn.setVisibility(View.GONE);
             /*startbtn.setVisibility(View.VISIBLE);*/
         }
         else {
             startbtn.setVisibility(View.VISIBLE);
+            spinnerterminal.setEnabled(false);
+            spDist.setEnabled(false);
+            msgliner.setEnabled(false);
+            biometric.setVisibility(View.GONE);
         }
     }
 
@@ -470,7 +715,10 @@ public class ApplicantInfoActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         try {
-            logout("Wish to exit ?", 2);
+            //logout("Wish to exit ?", 2);
+            //onBackPressed();
+            startActivity(new Intent(getApplicationContext(),HomeActivity.class));
+            finishAllActivities();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -532,6 +780,68 @@ public class ApplicantInfoActivity extends BaseActivity {
             });
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private class StartTest extends AsyncTask<Void,Void,Void> {
+        String url="http://"+macnip+":1300"+"/simpleserver/";
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            pDialog = new ProgressDialog(ApplicantInfoActivity.this);
+            pDialog.setMessage("Please wait...");
+            pDialog.setCancelable(false);
+            pDialog.show();
+        }
+
+
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm:ss");
+            String strDate = "Current Time when CALL API : " + mdformat.format(calendar.getTime());
+            //createtext(strDate);
+
+            HttpHandler httpHandler=new HttpHandler();
+            myresponse=httpHandler.makeServiceCall(url);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            if (pDialog.isShowing())
+                pDialog.dismiss();
+
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm:ss");
+            String strDate = "Current Time when RESPONSE : " + mdformat.format(calendar.getTime());
+           // createtext(strDate);
+
+
+
+            StringTokenizer stringTokenizer=new StringTokenizer(stripHtml(myresponse),"#");
+            String value=stringTokenizer.nextToken();
+            String value1=stringTokenizer.nextToken();
+            int myval=Integer.parseInt(value1);
+            if(myval==0){
+                Toast.makeText(ApplicantInfoActivity.this, "TEST NOT TRIGGER", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(getApplicationContext(), "Test Started", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(),AppointmentCheckActivity.class));
+                finish();
+                Config.MACHINE_IP="";
+                editortrack.putString("teststate","YES");
+                editortrack.commit();
+
+                // Config.MACHINE_IP="";
+            }
+
+
         }
     }
 }

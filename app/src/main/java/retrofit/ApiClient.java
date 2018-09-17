@@ -12,7 +12,7 @@ public class ApiClient {
 
 
 
-    public static String BASE_URL=null;
+    public static String BASE_URL="http://192.168.10.115:1300/";
     /* = "http://"+ Config.IP_ADDRESS+"/ADTT_SEVICE/";*/
 
     /*public static String BASE_URL = "http://182.72.228.66/ADTT_SEVICE/";
@@ -45,8 +45,8 @@ public class ApiClient {
     public static OkHttpClient getRequestHeader() {
         if (null == okHttpClient) {
             okHttpClient = new OkHttpClient.Builder()
-                    .readTimeout(120, TimeUnit.SECONDS)
-                    .connectTimeout(120, TimeUnit.SECONDS)
+                    .readTimeout(5, TimeUnit.SECONDS)
+                    .connectTimeout(5, TimeUnit.SECONDS)
                     .build();
         }
         return okHttpClient;

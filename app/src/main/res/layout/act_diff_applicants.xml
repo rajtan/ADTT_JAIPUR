@@ -91,6 +91,7 @@
                         android:orientation="horizontal"
                         android:padding="10dp"
                         android:weightSum="1"
+                        android:visibility="gone"
 
                         >
 
@@ -174,18 +175,17 @@
                             android:layout_height="wrap_content"
                             android:layout_weight=".6"
                             android:text="NOT SET"
-                            android:visibility="gone"
                             android:textColor="@color/darkblue"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:visibility="gone" />
 
                         <Spinner
                             android:id="@+id/spin_trackid"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight=".4"
-
                             android:layout_marginLeft="0dp"
-                            ></Spinner>
+
+                            android:layout_weight=".4"></Spinner>
 
 
                     </LinearLayout>

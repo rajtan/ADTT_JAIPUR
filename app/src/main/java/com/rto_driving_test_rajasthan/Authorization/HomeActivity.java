@@ -23,6 +23,8 @@ import android.widget.Toast;
 
 import com.rto_driving_test_rajasthan.R;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -67,9 +69,13 @@ public class HomeActivity extends BaseActivity {
     Spinner spinner;
     ArrayAdapter<String> arrayAdapter;
     Toolbar toolbar;
-    SharedPreferences sp, sp1, sp2, sp3, trackpref, trackprefone, trackpreftwo;
+    SharedPreferences sp, sp1, sp2, sp3, trackpref, trackprefone, trackpreftwo,spone,sptwo;
     SharedPreferences.Editor editor, trackeditor, onetrackeditor, twotrackeditor;
     String trackidvalu;
+    String testState;
+    public static String MYTESTPREF="testtrack";
+
+    public String MYPREFTWO="machineipsock";
 
     String track_id, testtype;
 
@@ -112,10 +118,12 @@ public class HomeActivity extends BaseActivity {
         trackpref = getApplicationContext().getSharedPreferences(NEWTRACK, Context.MODE_PRIVATE);
         trackprefone = getApplicationContext().getSharedPreferences(TRACKPREFONE, Context.MODE_PRIVATE);
         trackpreftwo = getApplicationContext().getSharedPreferences(TRACKPREFTWO, Context.MODE_PRIVATE);
+        spone = getApplicationContext().getSharedPreferences(MYTESTPREF, Context.MODE_PRIVATE);
+        sptwo = getApplicationContext().getSharedPreferences(MYPREFTWO, Context.MODE_PRIVATE);
     /*    trackpref1 = getApplicationContext().getSharedPreferences(TR2, Context.MODE_PRIVATE);
         trackpref2 = getApplicationContext().getSharedPreferences(TR3, Context.MODE_PRIVATE);*/
 
-
+        testState=spone.getString("teststate","");
         editor = sp1.edit();
         trackeditor = trackpref.edit();
         onetrackeditor=trackprefone.edit();
@@ -295,17 +303,56 @@ public class HomeActivity extends BaseActivity {
 
         if (myvalue.length != 0) {
 
-            if (myvalue.length == 1) {
-                myspinvalue = new String[]{"TRACK 1"};
-            } else if (myvalue.length == 2) {
-                myspinvalue = new String[]{"TRACK 1", "TRACK 2"};
-            } else if (myvalue.length == 3) {
-                myspinvalue = new String[]{"TRACK 1", "TRACK 2", "TRACK 3"};
-            } else {
+            String myval1= "";
+            String myval2= "";
+            try
+            {
+                if(!myvalue[0].equalsIgnoreCase("")){
+                    myval1 = myvalue[0].toString();
+                }else if (!myvalue[1].equalsIgnoreCase("")){
+                    myval2 = myvalue[1].toString();
+                }
+                else if (!myvalue[0].equalsIgnoreCase("") && !myvalue[1].equalsIgnoreCase("")){
+                    myval1 = myvalue[0].toString();
+                    myval2 = myvalue[1].toString();
+                    Log.e("myvalue[0]",""+myvalue[0]);
+                    Log.e("myvalue[1]",""+myvalue[1]);
 
+                }
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
+            if(myval1.equalsIgnoreCase("RJ1401") && myval2.equalsIgnoreCase("")){
+                myspinvalue = new String[]{"TRACK 1"};
+            }
+            else if(myval1.equalsIgnoreCase("RJ1402") && myval2.equalsIgnoreCase("")){
+                myspinvalue = new String[]{"TRACK 2"};
+            }
+            else if(myval1.equalsIgnoreCase("RJ1401") && myval2.equalsIgnoreCase("RJ1402")){
+                myspinvalue = new String[]{"TRACK 1","TRACK 2"};
+            }
+            else {
                 myspinvalue = new String[]{"SELECT TRACK "};
 
             }
+
+           /* if (!TextUtils.isEmpty(myval1) && TextUtils.isEmpty(myval2)) {
+                myspinvalue = new String[]{"TRACK 1"};
+            } else if (!TextUtils.isEmpty(myval2) && TextUtils.isEmpty(myval1)) {
+                myspinvalue = new String[]{"TRACK 2"};
+            }
+            else if(!TextUtils.isEmpty(myval1) && !TextUtils.isEmpty(myval2)){
+                myspinvalue = new String[]{"TRACK 1","TRACK 2"};
+            }
+            else {
+
+                myspinvalue = new String[]{"SELECT TRACK "};
+
+            }*/
 
         } else {
             Log.e("VALUE IS 0", "VALUE 0");
@@ -319,32 +366,38 @@ public class HomeActivity extends BaseActivity {
 
                 String value = spinner.getSelectedItem().toString();
                 Log.e("SPINITEM", value);
+                Log.e("myvalue[i].toString();", myvalue[i].toString());
 
                 if (value.equalsIgnoreCase("SELECT TRACK")) {
                     Toast.makeText(getApplicationContext(), "PLEASE SELECT TRACK", Toast.LENGTH_SHORT).show();
-                } else if (value.equalsIgnoreCase("TRACK 1")) {
+                }
+                else {
+                    trackidvalu=myvalue[i].toString();
+                }
+                /*else if (value.equalsIgnoreCase("TRACK 1")) {
 
                     //Log.e("MYLISTVALUE",mylist.get(0));
                     trackidvalu = myvalue[0];
 
-                      /*  editor.putString("trackid",tr1);
-                        editor.commit();*/
+                      *//*  editor.putString("trackid",tr1);
+                        editor.commit();*//*
 
                 } else if (value.equalsIgnoreCase("TRACK 2")) {
 
                     //Log.e("MYLISTVALUE",mylist.get(1));
                     trackidvalu = myvalue[1];
-                        /*editor.putString("trackid",tr2);
-                        editor.commit();*/
+                        *//*editor.putString("trackid",tr2);
+                        editor.commit();*//*
 
                 } else if (value.equalsIgnoreCase("TRACK 3")) {
 
                     //Log.e("MYLISTVALUE",mylist.get(2));
                     trackidvalu = myvalue[2];
 
-                }
+                }*/
 
             }
+
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -396,19 +449,35 @@ public class HomeActivity extends BaseActivity {
             case R.id.proceed_btn:
                 if (validation()) {
 
-                    Log.e("trackidvalu", trackidvalu);
-                    trackeditor.putString("tracknewid", trackidvalu);
-                    trackeditor.commit();
+                    if(testState.equalsIgnoreCase("NO")){
+                        Config.MACHINE_IP=sptwo.getString("socket_machinip","");
+
+                        startActivity(new Intent(getApplicationContext(),ApplicantInfoActivity.class));
+
+                        finishAllActivities();
+                    }
+                    else {
+                        Log.e("trackidvalu", trackidvalu);
+                        trackeditor.putString("tracknewid", trackidvalu);
+                        trackeditor.commit();
 
 
-                    Intent intent = new Intent(getApplicationContext(), AppointmentCheckActivity.class);
-                    intent.putExtra("trackid", track_id);
-                    intent.putExtra("testtype", testtype);
-                    startActivity(intent);
-                    finish();
-                    Config.MACHINE_IP = "";
-                    //startActivity(new Intent(getApplicationContext(),AppointmentCheckActivity.class));
-                    // Toast.makeText(getApplicationContext(), "Welcome to Check Today Appointment", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), AppointmentCheckActivity.class);
+                        intent.putExtra("trackid", track_id);
+                        intent.putExtra("testtype", testtype);
+                        startActivity(intent);
+                        finish();
+                        Config.MACHINE_IP = "";
+
+
+
+                        //startActivity(new Intent(getApplicationContext(),AppointmentCheckActivity.class));
+                        // Toast.makeText(getApplicationContext(), "Welcome to Check Today Appointment", Toast.LENGTH_SHORT).show();
+
+
+                    }
+
+
                 }
 
             /*case R.id.rl_longclick:

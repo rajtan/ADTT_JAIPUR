@@ -39,6 +39,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import butterknife.BindView;
@@ -62,15 +63,18 @@ public class VerifyActivity extends BaseActivity implements AuthBfdCap, OnClickL
     private ImageView imgFP;
     boolean isWorking = false;
     RequestQueue requestQueue;
-    String ll_no,dltest_seq,cov_cd,card_num,track_id,machine_id="";
+    String ll_no,dltest_seq,cov_cd,card_num,track_id,machine_id,camip="";
     String cam_type="0";
     int check=1;
     public boolean AuthComplete = false;
     Handler handler = new Handler(Looper.getMainLooper());
 
-    SharedPreferences sp;
+    SharedPreferences sp,spone,sptwo,spthree;
     public String MYPREF="testtrack";
-    SharedPreferences.Editor editor;
+    public String MYPREFONE="typetest";
+    public String MYPREFTWO="machineipsock";
+    public String MYPREFTHREE="camiptxt";
+    SharedPreferences.Editor editor,editorone,editortwo,editorthree;
 
 
     @Override
@@ -81,7 +85,13 @@ public class VerifyActivity extends BaseActivity implements AuthBfdCap, OnClickL
         setAppBar("Authentication", true);
 
         sp=getApplicationContext().getSharedPreferences(MYPREF,MODE_PRIVATE);
+        spone=getApplicationContext().getSharedPreferences(MYPREFONE,MODE_PRIVATE);
+        sptwo=getApplicationContext().getSharedPreferences(MYPREFTWO,MODE_PRIVATE);
+        spthree=getApplicationContext().getSharedPreferences(MYPREFTHREE,MODE_PRIVATE);
         editor=sp.edit();
+        editorone=spone.edit();
+        editortwo=sptwo.edit();
+        editorthree=spthree.edit();
 
 ////String ll_no,dltest_seq,cov_cd,card_num,track_id,machine_id,cam_type="";
         Bundle bundle=getIntent().getExtras();
@@ -92,9 +102,21 @@ public class VerifyActivity extends BaseActivity implements AuthBfdCap, OnClickL
         track_id=bundle.getString("track_id");
         machine_id=bundle.getString("machine_id");
         cam_type=bundle.getString("cam_type");
+        camip=bundle.getString("selectedcamip");
 
         Log.e("BUNDEL_DATA",ll_no +"\n"+dltest_seq+"\n"+cov_cd+"\n"+card_num+"\n"+track_id+"\n"+machine_id+"\n"+cam_type);
         Log.e("LEFTTEMPLATEPATH",CommonFunctions.LEFTTEMPLATEPATH);
+
+        editor.putString("teststate","NO");
+        editor.commit();
+        editorone.putString("type","TW");
+        editorone.commit();
+        editortwo.putString("socket_machinip","192.168.10.115");
+        editortwo.commit();
+        Config.MACHINE_IP="192.168.10.115";
+
+        onBackPressed();
+
         requestQueue= Volley.newRequestQueue(this);
         initGUI();
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -204,7 +226,24 @@ public class VerifyActivity extends BaseActivity implements AuthBfdCap, OnClickL
                                     //startActivity(new Intent(getApplicationContext(),ApplicantInfoActivity.class));
                                     finishAllActivities();*/
 
+
+                                        /* for testing only  start*/
+                                 /*   editor.putString("teststate","NO");
+                                    editor.commit();
+                                    editorone.putString("type","TW");
+                                    editorone.commit();
+                                    editortwo.putString("socket_machinip","192.168.10.115");
+                                    editortwo.commit();
+                                    Config.MACHINE_IP="192.168.10.115";
+
+                                    onBackPressed();*/
+
+                                    /* for testing only  end*/
                                         getsocketapi();
+
+
+
+
                                 }
                             });
                         }
@@ -216,28 +255,51 @@ public class VerifyActivity extends BaseActivity implements AuthBfdCap, OnClickL
         });
     }
 
-    private void getsocketapi() {
+    public void getsocketapi() {
+
+       /* Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm:ss");
+        String strDate = "Current Time when AUTHORISE APICALL : " + mdformat.format(calendar.getTime());
+        createtext(strDate);*/
+
+
         String url="";
         //LLNO,DLTEST_SEQ ,COV_CD,CARD_NUMBER,TRACK_ID,MACHINE_ID,CAM_TYPE
         Log.e("BUNDEL_DATA",ll_no +"\n"+dltest_seq+"\n"+cov_cd+"\n"+card_num+"\n"+track_id+"\n"+machine_id+"\n"+cam_type);
         //String url1= ApiClient.BASE_URL+"ADTT_DataInter.svc/Set_ApplicationInfo/ll_no/dltest_seq/cov_cd/card_num/track_id/machine_id/cam_type";
-
         if(cam_type.equalsIgnoreCase("") || cam_type.equalsIgnoreCase(null)){
             cam_type="0";
             url= ApiClient.BASE_URL+"ADTT_DataInter.svc/Set_ApplicationInfo/"+ll_no+"/"+dltest_seq+"/"+cov_cd+"/"+card_num+"/"+track_id+"/"+machine_id+"/"+cam_type;
+            editor.putString("teststate","NO");
+            editor.commit();
+            editorone.putString("type","TW");
+            editorone.commit();
+            editorthree.putString("camip","");
+            editorthree.commit();
+
         }
         else {
             url= ApiClient.BASE_URL+"ADTT_DataInter.svc/Set_ApplicationInfo/"+ll_no+"/"+dltest_seq+"/"+cov_cd+"/"+card_num+"/"+track_id+"/"+machine_id+"/"+cam_type;
+            editor.putString("teststate","NO");
+            editor.commit();
+            editorone.putString("type","FW");
+            editorone.commit();
+            editorthree.putString("camip",camip);
+            editorthree.commit();
         }
 
 
-        createtext(url);
+        //createtext(url);
         Log.e("MYSOCKETURL",url);
         StringRequest stringRequest=new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
 
                 Log.e("SERVER IP",response);
+                /*Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm:ss");
+                String strDate = "Current Time when AUTHORISE RESPONSE : " + mdformat.format(calendar.getTime());
+                createtext(strDate);*/
 
                 try {
                     JSONObject jsonObject=new JSONObject(response);
@@ -246,13 +308,15 @@ public class VerifyActivity extends BaseActivity implements AuthBfdCap, OnClickL
                     String machineip=jsonObject1.optString("MACHINE_IP");
                     Log.e("machineip",machineip);
                     Config.MACHINE_IP=machineip;
-                   /* Intent intent=new Intent(getApplicationContext(),ApplicantInfoActivity.class);
+                    /*Intent intent=new Intent(getApplicationContext(),ApplicantInfoActivity.class);
                     intent.putExtra("act_type","VERIFY");
                     intent.putExtra("response","RESPONSE");
                     startActivity(intent);
                     finish();*/
-                    editor.putString("teststate","NO");
-                    editor.commit();
+
+                    editortwo.putString("socket_machinip",machineip);
+                    editortwo.commit();
+
                    onBackPressed();
 
                     finish();
@@ -353,12 +417,12 @@ public class VerifyActivity extends BaseActivity implements AuthBfdCap, OnClickL
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd");
         Date now = new Date();
         //String fileName = formatter.format(now) + ".txt";//like 2016_01_12.txt
-        String fileName = "ADTT_JAIPUR_LOG" + ".txt";//like 2016_01_12.txt
+        String fileName = "ADTT_JAIPUR_VERIFYTIMELOG" + ".txt";//like 2016_01_12.txt
 
 
         try
         {
-            File root = new File(Environment.getExternalStorageDirectory()+File.separator+"ADTT_JAIPUR", "Log Files");
+            File root = new File(Environment.getExternalStorageDirectory()+File.separator+"ADTT_JAIPUR_TIME_AUTH_LOG", "Log Files");
             //File root = new File(Environment.getExternalStorageDirectory(), "Notes");
             if (!root.exists())
             {

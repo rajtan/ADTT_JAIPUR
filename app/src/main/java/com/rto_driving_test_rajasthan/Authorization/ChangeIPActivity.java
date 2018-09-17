@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.ArrayMap;
@@ -22,8 +23,14 @@ import com.rto_driving_test_rajasthan.R;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -236,6 +243,14 @@ public class ChangeIPActivity extends BaseActivity {
         btn_set.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                /*Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat mdformat = new SimpleDateFormat("HH:mm:ss");
+                String strDate = "Current Time when RESPONSE : " + mdformat.format(calendar.getTime());
+
+                createtext(strDate);*/
+
+
+
                 // baseRequest=new BaseRequest(getApplicationContext());
                 ApiClient.BASE_URL = null;
                 //Config.IP_ADDRESS=ipEdit.getText().toString();
@@ -260,7 +275,13 @@ public class ChangeIPActivity extends BaseActivity {
 //                BaseRequest baseRequest_list=new BaseRequest(ChangeIPActivity.this);
                 //  callApi();
 
-                if (TextUtils.isEmpty(track1.getText().toString()) && TextUtils.isEmpty(track2.getText().toString())) {
+
+                addtrack();
+                Toast.makeText(getApplicationContext(), "New IP configuration set up" + "\n" + ApiClient.BASE_URL, Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getApplicationContext(), HomeActivity.class));
+                finish();
+
+                /*if (TextUtils.isEmpty(track1.getText().toString()) && TextUtils.isEmpty(track2.getText().toString())) {
                     Toast.makeText(getApplicationContext(), " ENTER TRACK 1 AND TRACK 2", Toast.LENGTH_SHORT).show();
                 } else if (TextUtils.isEmpty(track1.getText().toString()) && TextUtils.isEmpty(track3.getText().toString())) {
                     Toast.makeText(getApplicationContext(), " ENTER TRACK 1 AND TRACK 3", Toast.LENGTH_SHORT).show();
@@ -269,12 +290,47 @@ public class ChangeIPActivity extends BaseActivity {
                     Toast.makeText(getApplicationContext(), "New IP configuration set up" + "\n" + ApiClient.BASE_URL, Toast.LENGTH_LONG).show();
                     startActivity(new Intent(getApplicationContext(), HomeActivity.class));
                     finish();
-                }
+                }*/
 
 
             }
         });
 
+    }
+
+    private void createtext(String url)
+    {
+
+        //String url="http://192.168.20.40:1300/simpleserver/machineip";
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy_MM_dd");
+        Date now = new Date();
+        //String fileName = formatter.format(now) + ".txt";//like 2016_01_12.txt
+        String fileName = "ADTT_JAIPUR_TIME_LOG" + ".txt";//like 2016_01_12.txt
+
+
+        try
+        {
+            File root = new File(Environment.getExternalStorageDirectory()+File.separator+"ADTT_JAIPUR", "Log Files");
+            //File root = new File(Environment.getExternalStorageDirectory(), "Notes");
+            if (!root.exists())
+            {
+                root.mkdirs();
+            }
+            File gpxfile = new File(root, fileName);
+
+
+            FileWriter writer = new FileWriter(gpxfile,true);
+            writer.append(url+"\n\n");
+            writer.flush();
+            writer.close();
+            Toast.makeText(this, "Data has been written to Report File", Toast.LENGTH_SHORT).show();
+        }
+        catch(IOException e)
+        {
+            e.printStackTrace();
+
+        }
     }
 
     //    BaseRequest baseRequest_list=null;

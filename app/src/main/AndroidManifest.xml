@@ -22,11 +22,11 @@
         <activity
             android:name=".Authorization.SplashActivity"
             android:screenOrientation="portrait">
-          <!--  <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            </intent-filter>
         </activity>
         <activity
             android:name=".Authorization.ActTabPhoto"
@@ -54,7 +54,15 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Authorization.ActShowTrack"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+
+          <!--  <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+
+        </activity>
         <activity
             android:name=".Authorization.ActTestReport"
             android:screenOrientation="portrait" />
@@ -91,11 +99,11 @@
             android:name=".Authorization.ApplicantInfoActivity"
             android:screenOrientation="portrait">
 
-            <intent-filter>
+           <!-- <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
         <activity
             android:name=".Authorization.VerifyActivity"
@@ -111,6 +119,16 @@
         </activity>
         <activity android:name=".Authorization.TrackSettingActivity"
             android:screenOrientation="portrait">
+
+        </activity>
+
+        <activity android:name=".Authorization.ApplicantListActivity">
+
+           <!-- <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
 
         </activity>
     </application>

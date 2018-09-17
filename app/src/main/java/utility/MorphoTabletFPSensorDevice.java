@@ -568,7 +568,8 @@ public class MorphoTabletFPSensorDevice implements Observer {
 		tmpl2.setTemplateType(TemplateType.MORPHO_PK_ISO_FMR);
 
 		listSearch.putTemplate(tmpl1);
-		listRef.putTemplate(tmpl2);
+		listRef.putTemplate(tmpl1);
+		//listRef.putTemplate(tmpl2);
 
 		int err = morphoDevice.verifyMatch(5, listSearch, listRef,matchingScore);
 

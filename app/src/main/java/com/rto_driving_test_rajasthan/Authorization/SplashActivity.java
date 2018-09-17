@@ -103,7 +103,11 @@ Context context;
                 @Override
                 public void run() {
 
-                    if(testState.equalsIgnoreCase("NO")){
+
+                    startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+                    finishAllActivities();
+
+                   /* if(testState.equalsIgnoreCase("NO")){
 
                         startActivity(new Intent(getApplicationContext(),ApplicantInfoActivity.class));
                         finishAllActivities();
@@ -112,7 +116,7 @@ Context context;
 
                         startActivity(new Intent(SplashActivity.this, HomeActivity.class));
                         finishAllActivities();
-                    }
+                    }*/
 
 
 //                    if (Utility.isConnectingToInternet(context)) {

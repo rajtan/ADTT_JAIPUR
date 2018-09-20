@@ -66,8 +66,8 @@ public class ApplicantListActivity extends BaseActivity {
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
-        dummydata();
-        //applicantvalue(response_infodata);
+        //dummydata();
+        applicantvalue(response_infodata);
     }
 
     private void applicantvalue(String response_infodata) {
@@ -118,7 +118,7 @@ public class ApplicantListActivity extends BaseActivity {
                 applicantdata.setLL_VALID_FROM(jsonObject2.getString("LL_VALID_FROM"));
                 applicantdata.setLL_VALID_TO(jsonObject2.getString("LL_VALID_TO"));
                 applicantdata.setSWD_FIRST_NAME(jsonObject2.getString("SWD_FIRST_NAME"));
-                //CommonFunctions.LEFTTEMPLATEPATH = jsonObject2.optString("THUMB");
+
 
                     applicantdatas.add(applicantdata);
 
@@ -162,8 +162,8 @@ public class ApplicantListActivity extends BaseActivity {
             applicantdata.setIS_Valid("null");
             applicantdata.setTHUMB("Rk1SACAyMAAAAAEUAAABAAGQAMUAxQEAAABUKUBMAAooUECjAB2QV4CTACQUV4DEACQUSkC7AECUXYBMAE60SkB3AE6kXUCcAFUcXYBkAFwkV4C9AHGcXUAnAH0wXUDEAIscXUAuAIu4XUASAJS0SkDgAKwMSkBrALMwXYDuALOkV0CAAMEwXUAnANEwXUBTANYgXYDuANYkV0AuAN0sXUDCAOQsXUB5APksXYCoAQWoXUDnAQ4kXUAuARUoV4CoASEsXUBDASokXUCAAS8gXUBrATEkXYAgATicSoCtAUIgXUDwAVAYXUB3AVIkXUDLAVcYXUA8AWcgSkC0AWcUXYCTAWwUXYDsAWwYUIB5AXMUXQAA");
             applicantdatas.add(applicantdata);
-            dashcamStr="["+"{"+"CAM_IP"+":"+"192.168.40.10"+"}"+"]";
-            terminalStr="["+"{"+"MACHINE_ID"+":"+"192.168.10.115"+"}"+"]"+"," + "{"+"MACHINE_IP"+":"+"RJ1401"+"}";
+            //dashcamStr="["+"{"+"CAM_IP"+":"+"192.168.40.10"+"}"+"]";
+            //terminalStr="["+"{"+"MACHINE_ID"+":"+"192.168.10.115"+"}"+"]"+"," + "{"+"MACHINE_IP"+":"+"RJ1401"+"}";
         }
 
         setAdapter();

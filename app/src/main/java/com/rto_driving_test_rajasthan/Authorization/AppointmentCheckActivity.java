@@ -96,19 +96,19 @@ public class AppointmentCheckActivity extends BaseActivity {
         if (!ConnectionDetector.isConnected(getApplicationContext())) {
 
             Toast.makeText(getApplicationContext(), "Check Network Connection", Toast.LENGTH_LONG).show();
-            startActivity(new Intent(getApplicationContext(),ApplicantListActivity.class));
-            finishAllActivities();
+          /*  startActivity(new Intent(getApplicationContext(),ApplicantListActivity.class));
+            finishAllActivities();*/
 
         }else {
 
-            startActivity(new Intent(getApplicationContext(),ApplicantListActivity.class));
+           // startActivity(new Intent(getApplicationContext(),ApplicantListActivity.class));
 
            /* Intent intent=new Intent(getApplicationContext(),ApplicantListActivity.class);
                                 *//*intent.putExtra("response",response);
                                 intent.putExtra("act_type","APPOINT_CHECK");*//*
             startActivity(intent);
             finish();*/
-            //userInfovoll();
+            userInfovoll();
         }
 
     }

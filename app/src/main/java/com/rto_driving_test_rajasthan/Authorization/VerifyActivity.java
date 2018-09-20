@@ -230,7 +230,7 @@ public class VerifyActivity extends BaseActivity implements AuthBfdCap, OnClickL
 
 
                                         /* for testing only  start*/
-                                    editor.putString("teststate","NO");
+                                    /*editor.putString("teststate","NO");
                                     editor.commit();
                                     editorone.putString("type","TW");
                                     editorone.commit();
@@ -238,13 +238,13 @@ public class VerifyActivity extends BaseActivity implements AuthBfdCap, OnClickL
                                     editortwo.commit();
                                     editorthree.putString("camip","");
                                     editorthree.commit();
-                                    //Config.MACHINE_IP="192.168.10.115";
+                                    Config.MACHINE_IP="192.168.10.115";
 
 
-                                    onBackPressed();
+                                    onBackPressed();*/
 
                                     /* for testing only  end*/
-                                       // getsocketapi();
+                                       getsocketapi();
 
 
 
@@ -275,6 +275,8 @@ public class VerifyActivity extends BaseActivity implements AuthBfdCap, OnClickL
         if(cam_type.equalsIgnoreCase("") || cam_type.equalsIgnoreCase(null)){
             cam_type="0";
             url= ApiClient.BASE_URL+"ADTT_DataInter.svc/Set_ApplicationInfo/"+ll_no+"/"+dltest_seq+"/"+cov_cd+"/"+card_num+"/"+track_id+"/"+machine_id+"/"+cam_type;
+            createtext("TWO WHEELER URL"+url);
+
             editor.putString("teststate","NO");
             editor.commit();
             editorone.putString("type","TW");
@@ -313,11 +315,7 @@ public class VerifyActivity extends BaseActivity implements AuthBfdCap, OnClickL
                     String machineip=jsonObject1.optString("MACHINE_IP");
                     Log.e("machineip",machineip);
                     Config.MACHINE_IP=machineip;
-                    /*Intent intent=new Intent(getApplicationContext(),ApplicantInfoActivity.class);
-                    intent.putExtra("act_type","VERIFY");
-                    intent.putExtra("response","RESPONSE");
-                    startActivity(intent);
-                    finish();*/
+
 
                     editortwo.putString("socket_machinip",machineip);
                     editortwo.commit();
